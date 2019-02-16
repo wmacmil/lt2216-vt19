@@ -113,7 +113,7 @@
   <form id="askReturn">
     <field name="returnField">
       <prompt>
-        What date do you want to return to <value expr="from"/>?
+        What date do you want to return to <value expr="to"/>?
       </prompt>
       <option>Monday</option>
       <option>Tuesday</option>
@@ -129,20 +129,20 @@
     </filled>
   </form>
 
-  <form id="confirmDateReturn">
-    <field name="confirmDateField" type="boolean">
-      <prompt>
-        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="f"/>? 
-      </prompt>
-      <filled>
-        <if cond="confirmDateField">
-          <goto next="#confirm" />
-        <else />
-          <goto next="#askFrom" />
-        </if>
-      </filled>
-    </field>
-  </form>
+  <!-- <form id="confirmDateReturn"> -->
+  <!--   <field name="confirmDateField" type="boolean"> -->
+  <!--     <prompt> -->
+  <!--       Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="return"/>? --> 
+  <!--     </prompt> -->
+  <!--     <filled> -->
+  <!--       <if cond="confirmDateField"> -->
+  <!--         <goto next="#confirm" /> -->
+  <!--       <else /> -->
+  <!--         <goto next="#askFrom" /> -->
+  <!--       </if> -->
+  <!--     </filled> -->
+  <!--   </field> -->
+  <!-- </form> -->
 
   <form id="confirm">
     <field name="confirmField">

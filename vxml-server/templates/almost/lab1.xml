@@ -15,10 +15,10 @@
   <var name="from" />
   <var name="to" />
   <var name="date" />
-  <var name="f" />
-  <!-- <var name="return" /> -->
+  <var name="ow" />
   <var name="c" />
   <!-- <var name="tw" /> -->
+  <var name="return" />
 
   <!-- State machine -->
   <!-- <form id="welcome"> -->
@@ -90,18 +90,19 @@
           <goto next="#confirmDate" />
         <else />
           <goto next="#askReturn" />
+          <!-- <goto next="#askTwoWay" /> -->
         </if>
       </filled>
     </field>
   </form>
 
   <form id="confirmDate">
-    <field name="oneWayFieldd" type="boolean">
+    <field name="oneWayField" type="boolean">
       <prompt>
         Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> 
       </prompt>
       <filled>
-        <if cond="oneWayFieldd">
+        <if cond="oneWayField">
           <goto next="#confirm" />
         <else />
           <goto next="#askFrom" />
@@ -110,10 +111,23 @@
     </field>
   </form>
 
+  <!-- <form id="askReturn"> -->
+  <!--   <field name="twoWayField"> -->
+  <!--     <prompt> -->
+  <!--       Is it a one way trip? -->
+  <!--     </prompt> -->
+  <!--     <option>Yes</option> -->
+  <!--   </field> -->
+  <!--   <filled> -->
+  <!--     <assign name="tw" expr="twoWayField" /> -->
+  <!--     <goto next="#askDate" /> -->
+  <!--   </filled> -->
+  <!-- </form> -->
+
   <form id="askReturn">
     <field name="returnField">
       <prompt>
-        What date do you want to return to <value expr="from"/>?
+        What date do you want to return to <value expr="to"/>?
       </prompt>
       <option>Monday</option>
       <option>Tuesday</option>
@@ -124,18 +138,18 @@
       <option>Sunday</option>
     </field>
     <filled>
-      <assign name="f" expr="returnField" />
+      <assign name="return" expr="returnField" />
       <goto next="#confirmDateReturn" />
     </filled>
   </form>
 
   <form id="confirmDateReturn">
-    <field name="confirmDateField" type="boolean">
+    <field name="oneWayField" type="boolean">
       <prompt>
-        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="f"/>? 
+        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="return"/>? 
       </prompt>
       <filled>
-        <if cond="confirmDateField">
+        <if cond="oneWayField">
           <goto next="#confirm" />
         <else />
           <goto next="#askFrom" />

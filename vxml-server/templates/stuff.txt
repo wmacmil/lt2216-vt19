@@ -1,0 +1,39 @@
+
+What date do you want to leave?
+
+Is it a one-way trip?
+
+<if cond="amount < 29.95">
+    <goto next="#debit"/>
+<else />
+    <prompt>You are out of cash. </prompt>
+</if>
+
+<field name="yn" type="boolean">
+
+<prompt>Did you say <value expr="user_input"/></prompt>
+
+<filled>
+<var name="result" expr="false"/>
+<if cond="yn">
+<assign name="result" expr="true"/>
+</if>
+<return namelist="result"/>
+</filled>
+
+</field>
+
+
+--bifurcate
+
+Do you want to go <from> to <to> on <date>
+
+yes
+
+Your flight has been booked!
+
+no ^^
+
+What date do you want to return?
+
+Do you want to go <from> to <to> on <date> returing on <return>?

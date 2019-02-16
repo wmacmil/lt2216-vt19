@@ -15,10 +15,9 @@
   <var name="from" />
   <var name="to" />
   <var name="date" />
-  <var name="f" />
-  <!-- <var name="return" /> -->
-  <var name="c" />
+  <var name="ow" />
   <!-- <var name="tw" /> -->
+  <!-- <var name="return" /> -->
 
   <!-- State machine -->
   <!-- <form id="welcome"> -->
@@ -64,7 +63,7 @@
   <form id="askDate">
     <field name="dateField">
       <prompt>
-        What date do you want to leave from <value expr="from"/>?
+        What date do you want to leave? <value expr="to"/>
       </prompt>
       <option>Monday</option>
       <option>Tuesday</option>
@@ -81,80 +80,31 @@
   </form>
 
   <form id="askOneWay">
-    <field name="oneWayField" type="boolean">
+    <field name="oneWayField">
       <prompt>
         Is it a one way trip?
       </prompt>
-      <filled>
-        <if cond="oneWayField">
-          <goto next="#confirmDate" />
-        <else />
-          <goto next="#askReturn" />
-        </if>
-      </filled>
-    </field>
-  </form>
-
-  <form id="confirmDate">
-    <field name="oneWayFieldd" type="boolean">
-      <prompt>
-        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> 
-      </prompt>
-      <filled>
-        <if cond="oneWayFieldd">
-          <goto next="#confirm" />
-        <else />
-          <goto next="#askFrom" />
-        </if>
-      </filled>
-    </field>
-  </form>
-
-  <form id="askReturn">
-    <field name="returnField">
-      <prompt>
-        What date do you want to return to <value expr="from"/>?
-      </prompt>
-      <option>Monday</option>
-      <option>Tuesday</option>
-      <option>Wednesday</option>
-      <option>Thursday</option>
-      <option>Friday</option>
-      <option>Saturday</option>
-      <option>Sunday</option>
+      <option>Yes</option>
     </field>
     <filled>
-      <assign name="f" expr="returnField" />
-      <goto next="#confirmDateReturn" />
+      <assign name="ow" expr="oneWayField" />
+      <!-- <goto next="#askTwoWay" /> -->
+      <goto next="#askDate" />
     </filled>
   </form>
 
-  <form id="confirmDateReturn">
-    <field name="confirmDateField" type="boolean">
-      <prompt>
-        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="f"/>? 
-      </prompt>
-      <filled>
-        <if cond="confirmDateField">
-          <goto next="#confirm" />
-        <else />
-          <goto next="#askFrom" />
-        </if>
-      </filled>
-    </field>
-  </form>
-
-  <form id="confirm">
-    <field name="confirmField">
-      <prompt>
-        Your flight has been booked!
-      </prompt>
-    </field>
-    <filled>
-      <assign name="c" expr="confirmField" />
-      <goto next="#askFrom" />
-    </filled>
-  </form>
+  <!-- <form id="askTwoWay"> -->
+  <!--   <field name="twoWayField"> -->
+  <!--     <prompt> -->
+  <!--       Is it a one way trip? -->
+  <!--     </prompt> -->
+  <!--     <option>Yes</option> -->
+  <!--   </field> -->
+  <!--   <filled> -->
+  <!--     <assign name="tw" expr="twoWayField" /> -->
+  <!--     <goto next="#askDate" /> -->
+  <!--   </filled> -->
+  <!-- </form> -->
 
 </vxml>
 
