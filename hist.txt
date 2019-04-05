@@ -1,0 +1,1001 @@
+   30  # param1 = 0
+   31  # param2 = 30
+   32  # ng_param = 2
+   33  # zoo = 0 
+   34  # variable names
+   35  # zeroorone
+   36  zoo = args.pos
+   37  path0 = args.inputfile
+   38  path1 = args.outputfile
+   39  test = args.outputtest
+   40  param1 = args.startline
+   41  param2 = args.endline
+   42  ng_param = args.ngram
+   43   
+   44  b = read_lines(path0,param1,param2)
+   45  a = "<unk> <start> " + foldr(cc,b,"")
+   46  # a == bb
+   47  # note, includes pos
+   48  my_dict = makeDict(a.split())
+   49  # sd2 = [del_pos(x) for x in my_dict]
+   50  sd2 = vectorize(my_dict,zoo)
+   51  # compresses same words with different pos
+   52  # e.g. |vc| <= |sd2|
+   53  vc = dict_map(sd2)
+   54  def one_two(xs):
+   55      one = [x[:-1] for x in xs]
+   56      two = [x[-1] for x in xs]
+   57      return one, two
+   58  def imperative_data(t1,t2):
+   59      test_lines = read_lines(path0,t1,t2)
+   60      test_lines[0] = "<unk> " + test_lines[0]
+   61      test_tokens = [x.split() for x in test_lines]
+   62      del_pos_test_tokens = [vectorize(y,zoo) for y in test_tokens]
+   63      test_ngrams = [ngrams(x,ng_param) for x in del_pos_test_tokens]
+   64      feature_ngram_sents = [concat_and_pair(vc,x) for x in test_ngrams]
+   65      feature_ngram_test_corpus = foldr(cc,feature_ngram_sents,[])
+   66      fl = one_two(feature_ngram_test_corpus)
+   67      return fl[0] , fl[1], feature_ngram_test_corpus
+   68  # test_lines = read_lines(path0,param1,param2)
+   69  # test_lines[0] = "<unk> " + test_lines[0]
+   70  # test_tokens = [x.split() for x in test_lines]
+   71  # dptt = [vectorize(y,zoo) for y in test_tokens]
+   72  # dptt == del_pos_test_tokens
+   73  # del_pos_test_tokens = [[del_pos(x) for x in y] for y in test_tokens]
+   74  ex_train1 = imperative_data(param1,param2)
+   75  ex_train = ex_train1[2]
+   76  df1 = pd.DataFrame(ex_train)
+   77  df1.to_csv(path1)
+   78  # df1.to_csv('gen.csv')
+   79  # X = ex_train[0]
+   80  # Y = ex_train[1]
+   81  # clf = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X,Y)
+   82  param3 = param2 + 1
+   83  test_size = math.ceil((param2 - param1) / 5)
+   84  param4 = param3 + test_size
+   85  test_train = imperative_data(param3,param4)
+   86  xasdf = test_train[2]
+   87  df_test = pd.DataFrame(test_train)
+   88  df_test.to_csv(test)
+   89  # asdf = test_train
+   90  # # # testing
+   91  # # tparam1 = 0
+   92  # # tparam2 = 10
+   93  # # asdf = imperative_data(111,119)
+   94  # # feature_ngram_sents[0][1]
+   95  # # .score(vectors,classes)
+   96  # # vectors === xasdf[:1]
+   97  # # classes === .classes
+   98  # xasdf = asdf[0]
+   99  # # qwer, rewq  = one_two(asdf[2])
+  100  # # qwer  == asdf[0]
+  101  # # rewq  == asdf[1]
+  102  # answers = clf.predict(xasdf)
+  103  # anslp = clf.predict_log_proba(xasdf)
+  104  # classlogprob = list(zip(asdf[1],anslp))
+  105  # # generate class dictionary from model
+  106  # classes = clf.classes_
+  107  # enclas = list(enumerate(classes))
+  108  # d = {key: value for (value, key) in enclas}
+  109  # # cool, finally works
+  110  # # things to change : add unks to both the imperative function and the n_grams_stuff function
+  111  # logProbs = [classlogprob[i][1][d[classlogprob[i][0]]] for i in range(len(classlogprob))]
+  112  # # cool, maybe works?
+  113  # # perplexity
+  114  # perp = 2 ** ((-1)/len(logProbs) * sum(logProbs))
+  115  # acc = clf.score(xasdf,asdf[1])
+  116  # # len(xasdf)
+  117  # # len(answers)
+  118  # # len(asdf[1])
+  119  # # i think this is the accuracy metric
+  120  # # clf.score(answers,asdf[1])
+  121  # # clf.score(X,Y)
+  122  # # 2 ** 2
+  123  # # classlogprob
+  124  # # classlogprob[-1][1]
+  125  # # classlogprob[-1][1][d[classlogprob[-1][0]]]
+  126  # # classlogprob[1][1][d[classlogprob[1][0]]]
+  127  # # classlogprob[1][0]
+  128  # # asdf[1]
+  129  # # d[classlogprob[1][0]]
+  130  # # get array spot, and return proba or log proba of that
+  131  # # enumerate
+  132  # # len(set(Y))
+  133  # # len(ans22[1])
+  134  # # ans2 = clf.predict(xasdf[:1])
+  135  # # def dstuff(xs):
+  136  # #     y = []
+  137  # #     for x in xs:
+  138  # #         y.append(get_correct(x))
+  139  # # def get_correct(x):
+  140  # # dstuff(ans22)
+  141  # # clf.classes_[0]
+  142  # # clf.get_params
+  143  # # ans22 = clf.predict_proba(xasdf[:10])
+  144  # # ans222 = clf.predict_log_proba(xasdf[:10])
+  145  # # df1 = pd.DataFrame(ex_train)
+  146  # # df1.to_csv(path1)
+  147  # # # makes sense now why xasdf, has to be generated in the same file as the dictionary is generated
+  148  # # import pickle
+  149  # # model = 'model'
+  150  # # myLogisticFcn = pickle.load(open(model, 'rb'))
+  151  # # ans3 = myLogisticFcn.predict(xasdf[:10])
+  152  # # # what pickle was trained on
+  153  # # f_input1 = pd.read_csv("g2.csv", index_col=0)
+  154  # # f_input_split1 = f_input1.to_dict('split')
+  155  # # eturned_input_data1 = f_input_split1['data']
+  156  # # df_input1 = pd.read_csv("g.csv", index_col=0)
+  157  # # # df_input1 = pd.read_csv(in_path, index_col=0)
+  158  # # df_input_split1 = df_input1.to_dict('split')
+  159  # # returned_input_data1 = df_input_split1['data']
+  160  # # ex_train[2] == returned_input_data1
+  161  # # ex_train[2][0] == returned_input_data1[0]
+  162  # # # ok, so
+  163  # # eturned_input_data1[0] == returned_input_data1[0]
+  164  # # len(ex_train[2]) 
+  165  # # len(returned_input_data1)
+  166  # # len(eturned_input_data1)
+  167  # # len(ex_train[2][0]) 
+  168  # # len(returned_input_data1[0])
+  169  # # len(eturned_input_data1[0])
+  170  # # sum(ex_train[2][0][:-1]) 
+  171  # # sum(returned_input_data1[0][:-1])
+  172  # # sum(eturned_input_data1[0][:-1])
+  173  # # def where1(xs):
+  174  # #     n = 0
+  175  # #     for x in xs:
+  176  # #         if x == 0:
+  177  # #             n += 1 
+  178  # #         else:
+  179  # #             return n
+  180  # # ex_train[2][0][0] == 0
+  181  # # where1(ex_train[2][0])
+  182  # # where1(returned_input_data1[0])
+  183  # # where1(eturned_input_data1[0])
+  184  vi read.py
+  185  python read.py -P 0 -N 3 -S 0 -E 50 brown_rga.txt g.csv t.csv
+  186  vi read.py 
+  187  python read.py -P 0 -N 3 -S 0 -E 50 brown_rga.txt g.csv t.csv
+  188  ls
+  189  vim g.csv 
+  190  vi g.csv 
+  191  vi read.py 
+  192  python read.py -P 0 -N 3 -S 0 -E 50 brown_rga.txt g.csv t.csv
+  193  ls
+  194  vim g.csv 
+  195  vi g.csv 
+  196  vi read.py 
+  197  rm g.csv 
+  198  python read.py -P 0 -N 3 -S 0 -E 50 brown_rga.txt g.csv t.csv
+  199  ls
+  200  vi g.csv 
+  201  vim t.csv 
+  202  vi t.csv 
+  203  ls
+  204  vi read.py 
+  205  exit
+  206  ls
+  207  cd stats/
+  208  ls
+  209  cd lt2212-v19-a
+  210  cd lt2212-v19-a3/
+  211  ls
+  212  vim test.py 
+  213  vi test.py 
+  214  pwd
+  215  cd ..
+  216  ls
+  217  cd ..
+  218  ls
+  219  lspwd
+  220  pwd
+  221  ls
+  222  cd shitThatworksMotherfucker/
+  223  ls
+  224  rm m g.csv t.csv 
+  225  ./myscript.sh 
+  226  vim read.py 
+  227  vi read.py 
+  228  ls
+  229  vi read.py 
+  230  python
+  231  vi myscript.sh 
+  232  ./myscript.sh 
+  233  vi read.py 
+  234  ./myscript.sh 
+  235  vi read.py 
+  236  ./myscript.sh 
+  237  ls
+  238  pwd
+  239  cat ../stats/lt2212-v19-a3/test.py 
+  240  cat ../stats/lt2212-v19-a3/gendata.py.py 
+  241  cat ../stats/lt2212-v19-a3/gendata.py
+  242  vi read.py 
+  243  vi read
+  244  ls
+  245  vi read.py 
+  246  ./myscript.sh 
+  247  vi test.py 
+  248  exit
+  249  ls
+  250  cd ~
+  251  ls
+  252  ls -a
+  253  vim .bash_profile 
+  254  vi .bash_profile 
+  255  vi .bashrc 
+  256  cd shitThatworksMotherfucker/
+  257  ls
+  258  ./m.sh 
+  259  vi m.sh 
+  260  ./m.sh 
+  261  vi m.sh 
+  262  vi myscript.sh 
+  263  ./myscript.sh 
+  264  vim myscript.sh 
+  265  vi myscript.sh 
+  266  ./myscript.sh 
+  267  vi myscript.sh 
+  268  ./myscript.sh 
+  269  ls
+  270  ls
+  271  cd shitThatworksMotherfucker/
+  272  ./myscript.sh 
+  273  vi read.py 
+  274  vi test.py 
+  275  ./myscript.sh 
+  276  vi test.py 
+  277  ./myscript.sh 
+  278  vi myscript.sh 
+  279  cat myscript.sh 
+  280  python read.py -P 0 -N 3 -S 0 -E 50 brown_rga.txt g.csv t.csv
+  281  kpython train.py g.csv m
+  282  python train.py g.csv m
+  283  python test.py t.csv m
+  284  which bash
+  285  vim myscript.sh 
+  286  vi myscript.sh 
+  287  ./myscript.sh 
+  288  vi myscript.sh 
+  289  which bash
+  290  cat myscript.sh 
+  291  cp myscript.sh m.sh
+  292  vim m.sh 
+  293  vi m.sh 
+  294  ./myscript.sh 
+  295  tmux
+  296  tmux attach
+  297  ls
+  298  tmux attach
+  299  ls
+  300  cd lt2216-vt19/
+  301  ls
+  302  cd ..
+  303  ls
+  304  cd stats/
+  305  ls
+  306  cd ..
+  307  ls
+  308  cd tricks/
+  309  ls
+  310  cd ..
+  311  ls
+  312  cd copy
+  313  ls
+  314  vim output.txt 
+  315  vi output.txt 
+  316  vim myscript.sh 
+  317  vi myscript.sh 
+  318  ls
+  319  cd ..
+  320  ls
+  321  tmux attach
+  322  ls
+  323  mkdir assignment2
+  324  cd assignment2/
+  325  pwd
+  326  ls
+  327  pwd
+  328  ls
+  329  cd c
+  330  ls
+  331  cd ..
+  332  ls
+  333  cd c 
+  334  ls
+  335  cd copy2/
+  336  ls
+  337  cd ..
+  338  ls
+  339  cd ..
+  340  ls
+  341  rm -rf *
+  342  ls
+  343  mv toserver/* .
+  344  ls
+  345  rm -rf toserver/
+  346  ls
+  347  vim r.py 
+  348  vi r.py 
+  349  ls
+  350  vim gendoc.py 
+  351  vi gendoc.py 
+  352  vi myscript.sh 
+  353  ls
+  354  vi myscript.sh 
+  355  ./myscript.sh 
+  356  ls
+  357  ls /scratch/reuters-topics/
+  358  ls
+  359  vim myscript.sh 
+  360  vi myscript.sh 
+  361  tmux attach
+  362  ls
+  363  cd ..
+  364  ls
+  365  cd ..
+  366  ls
+  367  cd templates/
+  368  ls
+  369  cd final
+  370  ls
+  371  mkdir copy8
+  372  cd ..
+  373  ls
+  374  mv lab1.xml final/copy8/
+  375  ls
+  376  cd l1copy/
+  377  ls
+  378  vim lab1.xml 
+  379  cp lab1.xml ..
+  380  ls
+  381  cd ..
+  382  ls
+  383  vim lab1.xml 
+  384  ls
+  385  vim lab1
+  386  ls
+  387  vim lab1.xml 
+  388  ls
+  389  cd copy5/
+  390  ls
+  391  vim lab1.xml 
+  392  ls
+  393  cd ..
+  394  ls
+  395  rm -rf copy2/ copy3/ copy4/ copy5/
+  396  ls
+  397  mkdir l1copy/copy
+  398  cp lab1 l1copy/copy/
+  399  ls
+  400  cp lab1.xml l1copy/copy/
+  401  ls
+  402  cat flascommand.txt 
+  403  flask run --port 8000
+  404  ls
+  405  cat hist.txt 
+  406   kill $(lsof -i :8000)
+  407  flask run --port 8000
+  408  ls
+  409  cd lt2216-vt19/
+  410  ls
+  411  cd vxml-server/
+  412  ls
+  413  cd templates/
+  414  ls
+  415  cd ..
+  416  ls
+  417  cd templates/
+  418  ls
+  419  vim lab1.xml 
+  420  cd ..
+  421  ls
+  422  cd grammars/
+  423  ls
+  424  vim lab2
+  425  vi lab2.xml 
+  426  vi lab21.xml 
+  427  ls .
+  428  ls -l
+  429  ls -a
+  430  rm .lab21.xml.swp 
+  431  ls
+  432  tmux
+  433  cd ..
+  434  ls
+  435  tmux
+  436  exit
+  437  cd ..
+  438  ls
+  439  cat flascommand.txt 
+  440  flask run --port 8000
+  441  ls
+  442  cd templates/
+  443  ls
+  444  cp lab1.xml BookFlight.xml
+  445  cp lab1.xml GetInfo.xml
+  446  vim BookFlight.xml 
+  447  exit
+  448  vim lab1.xml 
+  449  ls
+  450  exit
+  451  ls
+  452  cd lt2216-vt19/
+  453  ls
+  454  cd vxml-server/
+  455  ls
+  456  tmux attach
+  457  exit
+  458  cd templates/
+  459  ls
+  460  vim lab1.xml 
+  461  vim BookFlight.xml 
+  462  vim lab1.xml 
+  463  vim BookFlight.xml 
+  464  vim lab1.xml 
+  465  ls
+  466  vim BookFlight.xml 
+  467  vim lab1.xml 
+  468  ls
+  469  vim lab1.xml 
+  470  vim BookFlight.xml
+  471  vim lab1.xml 
+  472  ls
+  473  vim BookFlight.xml 
+  474  vim lab1.xml 
+  475  pwd
+  476  vim BookFlight.xml 
+  477  vim lab1.xml 
+  478  vim BookFlight.xml
+  479  ls
+  480  c
+  481  vim lab1.xml 
+  482  ls
+  483  cp BookFlight.xml bookflight.xml
+  484  vim lab1.xml 
+  485  pwd
+  486  vim lab1.xml 
+  487  ls
+  488  cd ..
+  489  ls
+  490  cd templates/
+  491  ls
+  492  vim lab2.xml 
+  493  cp bookflight.xml ..
+  494  ls
+  495  vim lab2.xml 
+  496  vim lab1.xml 
+  497  ls
+  498  vim lab1
+  499  vim lab1.xml 
+  500  ls
+  501  ivm lab1.xml 
+  502  ls
+  503  ls
+  504  cat flascommand.txt 
+  505  flask run --port 8000
+  506  ls
+  507  flask run --port 8000
+  508  ls
+  509  vim templates/
+  510  cd templates/
+  511  ls
+  512  vim BookFlight.xml 
+  513  ls
+  514  cd ..
+  515  ls
+  516  flask run --port 8000
+  517  ls
+  518  flask run --port 8000
+  519  ls
+  520  cd ..
+  521  ls
+  522  cd vxml-server/
+  523  ls
+  524  flask run --port 8000
+  525  cd /
+  526  ls
+  527  cd ~
+  528  ls
+  529  cd lt2216-vt19/
+  530  ls
+  531  cd vxml-server/
+  532  ls
+  533  pwd
+  534  cat flascommand.txt 
+  535  ls
+  536  cd templates/
+  537  ls
+  538  vim lab1.xml 
+  539  l
+  540  ls
+  541  ls
+  542  vim lab2.xml 
+  543  ls
+  544  vim lab2.xml 
+  545  ls
+  546  vim lab1.xml 
+  547  ls
+  548  cd ..
+  549  ls
+  550  vim app.py 
+  551  ls
+  552  vim bookflight.xml 
+  553  vim lab1.xml 
+  554  ls
+  555  vim GetInfo.xml 
+  556  cd ..
+  557  ls
+  558  cat flascommand.txt 
+  559  flask run --port 8000
+  560  ls
+  561  cd templates/
+  562  ls
+  563  ivm lab1.xml 
+  564  vim lab1.xml 
+  565  flask run --port 8000
+  566  ls
+  567  cd .
+  568  cd ..
+  569  ls
+  570  flask run --port 8000
+  571  vim app.py 
+  572  ls
+  573  flask run --port 8000
+  574  ls
+  575  cd templates/
+  576  ls
+  577  cd ..
+  578  ls
+  579  flask run --port 8000
+  580  ls
+  581  flask run --port 8000
+  582  ls
+  583  cd templates/
+  584  ls
+  585  vim GetInfo.xml 
+  586  vim bookflight.xml 
+  587  ls
+  588  cd ..
+  589  ls
+  590  cat flascommand.txt 
+  591  flask run --port 8000
+  592  ls
+  593  vim bookflight.xml 
+  594  ls
+  595  rm bookflight.xml 
+  596  ls
+  597  cd templates/
+  598  ls
+  599  vim lab1.xml 
+  600  ls
+  601  cd ..
+  602  ls
+  603  cat flascommand.txt 
+  604  flask run --port 8000
+  605  vim templates/
+  606  cd templates/
+  607  ls
+  608  cd ..
+  609  ls
+  610  cat flascommand.txt 
+  611  flask run --port 8000
+  612  ls
+  613  vim templates/
+  614  cd templates/
+  615  ls
+  616  vim BookFlight.xml 
+  617  ls
+  618  flask run --port 8000
+  619  ls
+  620  ils
+  621  ls
+  622  vim lab1.xml 
+  623  ls
+  624  vim lab1.xml 
+  625  vim lab2.xml .
+  626  vim bookflight.xml 
+  627  ls
+  628  vim lab1
+  629  vim lab1.xml 
+  630  vim bookflight.xml 
+  631  ls
+  632  vim lab1.xml 
+  633  vim lab2.xml 
+  634  vim bookflight.xml 
+  635  ls
+  636  cd lt2216-vt19/
+  637  ls
+  638  cd vxml-server/
+  639  tmux
+  640  exit
+  641  ls
+  642  vim getPhone.xml 
+  643  vim bookflight.xml 
+  644  ls
+  645  vim lab1.xml 
+  646  vim l1copy/
+  647  vim bookflight.xml 
+  648  vim getPhone.xml 
+  649  cd ..
+  650  ls
+  651  vim app.py 
+  652  cd templates/
+  653  ls
+  654  vim lab1.xml 
+  655  ls
+  656  cd ..
+  657  ls
+  658  cat flascommand.txt 
+  659  flask run --port 8000
+  660  ls
+  661  cd templates/
+  662  ls
+  663  vim bookflight.xml 
+  664  ls
+  665  cd ..
+  666  ls
+  667  cd grammars/
+  668  ls
+  669  vim lab2.xml 
+  670  vim lab21.xml 
+  671  ls
+  672  vim lab2.xml 
+  673  vim lab21.xml 
+  674  vim lab2.xml 
+  675  vim lab21.xml 
+  676  vim lab2.xml 
+  677  ls
+  678  mkdir copy3
+  679  cp lab2.xml lab21.xml copy3/
+  680  ls
+  681  vim lab2.xml 
+  682  cd ..
+  683  ls
+  684  cd templates/
+  685  ls
+  686  vim bookflight.xml 
+  687  cd ..
+  688  ls
+  689  cd grammars/
+  690  ls
+  691  vim lab2.xml 
+  692  cd te
+  693  cd tem
+  694  ls
+  695  cd ..
+  696  ls
+  697  cd templates/
+  698  ls
+  699  vim bookflight.xml 
+  700  ls
+  701  cd lt2216-vt19/
+  702  ls
+  703  cd vxml-server/
+  704  ls
+  705  cd templates/
+  706  ls
+  707  cp bookflight.xml getPhone.xml
+  708  vim getPhone.xml 
+  709  ls
+  710  c
+  711  vim final/copy8/lab1.xml 
+  712  cd ..
+  713  ls
+  714  cd templates/
+  715  ls
+  716  tmux
+  717  ls
+  718  vim bookflight.xml 
+  719  ls
+  720  cd lt2216-vt19/vxml-server/
+  721  ls
+  722  cd templates/
+  723  ls
+  724  vim lab1c.xml 
+  725  ls
+  726  tmux attach
+  727  ls
+  728  tmux attach
+  729  ls
+  730  cd vxml-server/
+  731  ls
+  732  ls
+  733  cd lt2216-vt19/
+  734  ls
+  735  exit
+  736  cd templates/
+  737  ls
+  738  vim lab4.xml 
+  739  ls
+  740  cd grammars/
+  741  ls
+  742  vim lab4.xml 
+  743  ls
+  744  c
+  745  clear
+  746  ls
+  747  tmux
+  748  ls
+  749  cd lt2216-vt19/vxml-server/
+  750  ls
+  751  tmux
+  752  tmux attach
+  753  ls
+  754  cd ..
+  755  ls
+  756  cd ..
+  757  ls
+  758  cd vxml-server/
+  759  ls
+  760  cd templates/
+  761  ls
+  762  cp bookflight.xml lab4.xml
+  763  vim lab4.xml 
+  764  ls
+  765  vim lab4
+  766  vim lab4.xml 
+  767  ls
+  768  vim lab4.xml 
+  769  vim lab2.xml 
+  770  ls
+  771  vim lab4.xml 
+  772  vim lab3.xml 
+  773  ls
+  774  vim lab4.xml 
+  775  vim lab2.xml 
+  776  vim lab4.xml 
+  777  ls
+  778  cd ..
+  779  ls
+  780  cat flascommand.txt 
+  781  flask run --port 8000
+  782  flask run --port 8001
+  783  ls
+  784  vim app.py 
+  785  flask run --port 8001
+  786  flask run --port 8002
+  787  ls
+  788  ivm app.py 
+  789  ls
+  790  vim app.py 
+  791  ls
+  792  cat flascommand.txt 
+  793  flask run --port 8000
+  794  flask run --port 8002
+  795  flask run --port 8001
+  796  flask run --port 8002
+  797  flask run --port 8001
+  798  flask run --port 8000
+  799  flask run --port 8001
+  800  flask run --port 8002
+  801  flask run --port 8000
+  802  ls
+  803  vim app.py 
+  804  flask run --port 8000
+  805  flask run --port 8001
+  806  flask run --port 8000
+  807  ls
+  808  vim app.py 
+  809  flask run --port 8000
+  810  ls
+  811  vim final/copy8/lab1.xml 
+  812  ls
+  813  cd ..
+  814  ls
+  815  cat flascommand.txt 
+  816  flask run --port 8000
+  817  cd templates/
+  818  ls
+  819  vim bookflight.xml 
+  820  ls
+  821  vim getPhone.xml 
+  822  ls
+  823  vim problems.txt
+  824  cp problems.txt lab1PartC.txt
+  825  ls
+  826  vim menu.xml 
+  827  rm menu.xml 
+  828  ls
+  829  rm BookFlight.xml 
+  830  ls
+  831  vim lab1c.xml 
+  832  vim lab1.xml 
+  833  vim lab1c.xml 
+  834  vim lab2.xml 
+  835  ls
+  836  vim almost/
+  837  cd almost/
+  838  ls
+  839  vim lab1.xml 
+  840  cd ..
+  841  ls
+  842  rm -rf almost/
+  843  ls
+  844  vim l2copy/
+  845  vim l2copy/lab2.xml 
+  846  ls
+  847  vim lab2.xml 
+  848  ls
+  849  vim bookflight.xml 
+  850  vim lab2.xml 
+  851  vim lab1.xml 
+  852  vim bookflight.xml 
+  853  vim lab2.xml 
+  854  vim bookflight.xml 
+  855  vim lab2.xml 
+  856  cp lab2.xml lab2copy.xml
+  857  vim lab2.xml 
+  858  rm lab2copy.xml 
+  859  cp lab2.xml lab2copy.xml
+  860  vim lab2.xml 
+  861  vim lab2copy.xml 
+  862  ls
+  863  mv lab2.xml l2copy/
+  864  cp lab2copy.xml lab2.xml
+  865  vim lab2.xml 
+  866  ls
+  867  vim lab2_vg.txt
+  868  vim lab2.xml 
+  869  vim stuff.txt 
+  870  rm stuff.txt 
+  871  ls
+  872  vim lab2_vg.txt 
+  873  ls
+  874  cd lab3/
+  875  ls
+  876  vim lab2.xml 
+  877  cd ..
+  878  ls
+  879  rm -rf lab3/
+  880  ls
+  881  vim problems.txt 
+  882  vim lab1.xml 
+  883  vim problems.txt 
+  884  cp lab1c.xml lab3.xml
+  885  vim lab3.xml 
+  886  ls
+  887  vim lab3.xml 
+  888  vim final.xml 
+  889  ls
+  890  cd final
+  891  ls
+  892  vim copy8/lab1.xml 
+  893  ls
+  894  cd ..
+  895  ls
+  896  vim lab3.xml 
+  897  ls
+  898  cd ..
+  899  ls
+  900  cd grammars/
+  901  ls
+  902  vim lab2.xml 
+  903  cp lab2.xml lab4.xml
+  904  vim lab4.xml
+  905  ls
+  906  vim lab2.xml 
+  907  vim lab4.xml 
+  908  vim ../templates/lab2.xml 
+  909  ls
+  910  vim lab2.xml 
+  911  ls
+  912  vim lab4.xml 
+  913  ls
+  914  vim lab4.xml 
+  915  vim ruleref.xml 
+  916  rm ruleref.xml 
+  917  ls
+  918  vim lab4.xml 
+  919  vim ../templates/lab4.xml 
+  920  vim lab2.xml 
+  921  vim ../templates/lab4.xml 
+  922  ls
+  923  vim lab4.xml 
+  924  ls
+  925  vim ../templates/lab2.xml 
+  926  ls
+  927  vim lab4.xml 
+  928  ls
+  929  mkdir c
+  930  mv copy copy2 copy3 c
+  931  ls
+  932  mkdir lab2copy
+  933  cp lab2.xml lab2copy/
+  934  vim lab2.xml 
+  935  cat lab2.xml lab4.xml  > l.xml
+  936  vim l.xml 
+  937  ls
+  938  mkdir copy2
+  939  mv lab2.xml lab2copy/
+  940  ls
+  941  cp l.xml lab2.xml
+  942  vim lab2.xml 
+  943  vim lab4.xml 
+  944  ls
+  945  vim lab2.xml 
+  946  rm lab4.xml 
+  947  cp lab2.xml lab4.xml
+  948  vim lab4.xml 
+  949  ls
+  950  mkdir lab4copy/
+  951  mkdir lab4copy/one
+  952  ls
+  953  cp lab4.xml lab4copy/one/
+  954  ls
+  955  vim lab4.xml 
+  956  ls
+  957  vim lab2.xml 
+  958  vim lab2copy/lab2.xml 
+  959  ls
+  960  vim lab4.xml 
+  961  pwd
+  962  cd ..
+  963  ls
+  964  pwd
+  965  ls
+  966  cd grammars/
+  967  ls
+  968  vim lab4.xml 
+  969  ls
+  970  vim lab2.xml 
+  971  rm lab2.xml 
+  972  ls
+  973  cp lab2copy/lab2.xml .
+  974  ls
+  975  vim lab2.xml 
+  976  cd ..
+  977  ls
+  978  cd ..
+  979  ls
+  980  cd ..
+  981  ls
+  982  cd lt2216-vt19/
+  983  git push -u origin master
+  984  git add --all
+  985  git commit -m "updates"
+  986  git push -u origin master
+  987  ls
+  988  cd ..
+  989  ls
+  990  cd lt2216-vt19/
+  991  ls
+  992  cd vxml-server/
+  993  ls
+  994  vim grammars/
+  995  cd grammars/
+  996  ls
+  997  vim lab4.xml 
+  998  ls
+  999  ils
+ 1000  ls
+ 1001  cd ..
+ 1002  ls
+ 1003  cat flascommand.txt 
+ 1004  ls
+ 1005  cat flascommand.txt 
+ 1006  flask run --port 8000
+ 1007  flask run --port 8001
+ 1008  ls
+ 1009  cd templates/
+ 1010  ls
+ 1011  vim lab3.xml 
+ 1012  cd ..
+ 1013  ls
+ 1014  flask run --port 8001
+ 1015  flask run --port 8002
+ 1016  cd ..
+ 1017  l
+ 1018  ls
+ 1019  cd ..
+ 1020  ls
+ 1021  cd lt2216-vt19/
+ 1022  ls
+ 1023  git add --all
+ 1024  git commit "make sure everything is somewhat cohesive
+"
+ 1025  git commit "make sure everything is somewhat cohesive"
+ 1026  ls
+ 1027  git commit "make sure everything is somewhat cohesive"
+ 1028  ls
+ 1029  history > hist.txt
