@@ -1,0 +1,31 @@
+Test report: 
+
+I encountered different types of errors, some of them run-time bugs and others I would define more broadly as "usability errors.  
+
+If one follows the following:
+
+  I want to go from Paris to London on February 19th
+  Boeing
+  Yes
+
+A goto error, (undefined ...) is occurs.
+
+If instead one says no, and gives a return date in the above dialogue, it spells out a number (presumably the interpreted date) which is almost impossible to understand, and presumably isn't the correct date: it doesn't specify what the date format should be. This usability, or UI error makes it impossible to confirm flight.
+
+A remark on style is that when it asks for the return date, "return" is pronounced quite poorly.
+
+Finally, if one doesn't explicity answer the questions it can still pass through certain states without indicating what information has been gathered, making it difficult for the user to decipher what to respond.  For example: with the DS in brackets, if we have the following, one can see the potential for an infinite loop to be formed.
+
+    Paris
+  [ ok... ]
+    Paris
+  [ the city you that you are leaving and the city that you are leaving must be different ... ]
+    Paris
+  [ where would you like to go... ]
+    Paris
+  [ the city you that you are leaving and the city that you are leaving must be different ... ]
+  New york
+  [ where would you like to go... ]
+    Paris
+
+The programmer of this system would, on top of fixing the explicit goto bug, stress the UI so that the user can easily understand which information to give, what has been given, and change information without starting over.

@@ -64,3 +64,58 @@
 
 
 </grammar>
+<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" tag-format="semantics/1.0" root="home">
+
+  <rule id="init" scope="public">
+    <item>
+      from
+      <ruleref uri="#city"/>
+      to
+      <ruleref uri="#city"/>
+      <tag>out.fromCity = rules.city; out.destination = rules.city; </tag>
+    </item>
+  </rule> 
+
+  <!-- <rule id="init" scope="public"> -->
+
+  <!--   <one-of> -->
+  <!--     <item> -->
+  <!--       <ruleref uri="#t"/> -->
+  <!--       <ruleref uri="#f"/> -->
+  <!--       <tag>out.to = rules.t; out.from = rules.f; </tag> -->
+  <!--     </item> -->
+  <!--     <item> -->
+  <!--       <ruleref uri="#f"/> -->
+  <!--       <ruleref uri="#t"/> -->
+  <!--       <tag>out.to = rules.t; out.from = rules.f; </tag> -->
+  <!--     </item> -->
+  <!--   </one-of> -->
+
+  <!-- </rule> --> 
+
+  <!-- <rule id="f"> -->
+  <!--   <item> -->
+  <!--     from --> 
+  <!--     <ruleref uri="#city"/> -->
+  <!--     <tag>out = rules.city</tag> -->
+  <!--   </item> -->
+  <!-- </rule> -->
+
+  <!-- <rule id="t"> -->
+  <!--   <item> -->
+  <!--     from --> 
+  <!--     <ruleref uri="#city"/> -->
+  <!--     <tag>out = rules.city</tag> -->
+  <!--   </item> -->
+  <!-- </rule> -->
+
+  <rule id="city">
+    <one-of>
+       <item> New York <tag>out = "NY";</tag> </item>
+       <item> Paris <tag>out = "Paris";</tag> </item>
+       <item> London <tag>out = "London";</tag> </item>
+    </one-of>
+  </rule>
+
+</grammar>

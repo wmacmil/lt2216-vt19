@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" tag-format="semantics/1.0" root="home">
+
+  <rule id="home" scope="public"> 
+    <count number="optional">
+      <item>I want to go </item>
+    </count>
+    <one-of>
+
+      <!-- <item> -->
+      <!--   <ruleref uri="#t"/> -->
+      <!--   <tag>out.to = rules.t;</tag> -->
+      <!-- </item> -->
+      <!-- <item> -->
+      <!--   <ruleref uri="#f"/> -->
+      <!--   <tag>out.to = rules.f;</tag> -->
+      <!-- </item> -->
+      <!-- <item> -->
+      <!--   <ruleref uri="#d"/> -->
+      <!--   <tag>out.to = rules.d;</tag> -->
+      <!-- </item> -->
+      <!-- <item> -->
+      <!--   <ruleref uri="#r"/> -->
+      <!--   <tag>out.to = rules.r;</tag> -->
+      <!-- </item> -->
+
+
+      <item>
+        <ruleref uri="#t"/>
+        <ruleref uri="#f"/>
+        <tag>out.to = rules.t; out.from = rules.f; </tag>
+      </item>
+      <item>
+        <ruleref uri="#f"/>
+        <ruleref uri="#t"/>
+        <tag>out.to = rules.t; out.from = rules.f; </tag>
+      </item>
+
+      <item>
+        <ruleref uri="#t"/>
+        <ruleref uri="#f"/>
+        <ruleref uri="#d"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#f"/>
+        <ruleref uri="#t"/>
+        <ruleref uri="#d"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d;</tag>
+      </item>
+
+    </one-of>
+  </rule>
+
+  <rule id="t">
+    <item>
+      to 
+      <ruleref uri="#city"/>
+      <tag>out = rules.city;</tag>
+    </item>
+  </rule>
+
+  <rule id="f">
+    <item>
+      from 
+      <ruleref uri="#city"/>
+      <tag>out = rules.city;</tag>
+    </item>
+  </rule>
+
+  <rule id="d">
+    <item>
+      on 
+      <ruleref uri="#month"/>
+      <ruleref uri="#number"/>
+      <tag>out = rules.month + " " + rules.number;</tag>
+    </item>
+  </rule>
+
+  <rule id="r">
+    <item>
+      returning on 
+      <ruleref uri="#month"/>
+      <ruleref uri="#number"/>
+      <tag>out = rules.month + " " + rules.number;</tag>
+    </item>
+  </rule>
+
+  <rule id="city">
+    <one-of>
+       <item> New York <tag>out = "NY";</tag> </item>
+       <item> Paris <tag>out = "Paris";</tag> </item>
+       <item> London <tag>out = "London";</tag> </item>
+    </one-of>
+  </rule>
+
+  <rule id="number">
+    <one-of>
+      <item>first <tag>out = "first";</tag></item> 
+      <item>second<tag>out = "second;"</tag></item>
+      <item>third<tag>out = "third;"</tag></item>
+      <item>fourth<tag>out = "fourth;"</tag></item>
+      <item>fifth<tag>out = "fifth;"</tag></item>
+      <item>sixth<tag>out = "sixth;"</tag></item>
+      <item>seventh<tag>out = "seventh;"</tag></item>
+      <item>eighth<tag>out = "eighth;"</tag></item>
+      <item>ninth<tag>out = "ninth;"</tag></item>
+      <item>tenth<tag>out = "tenth;"</tag></item>
+      <item>eleventh<tag>out = "eleventh;"</tag></item>
+      <item>twelth<tag>out = "twelth;"</tag></item>
+      <item>thirteenth<tag>out = "thirteenth;"</tag></item>
+      <item>fourteenth<tag>out = "fourteenth;"</tag></item>
+      <item>fifteenth<tag>out = "fifteenth;"</tag></item>
+      <item>sixteenth<tag>out = "sixteenth;"</tag></item>
+      <item>seventeenth<tag>out = "seventeenth;"</tag></item>
+      <item>eighteenth<tag>out = "eighteenth;"</tag></item>
+      <item>nineteenth<tag>out = "nineteenth;"</tag></item>
+      <item>twentieth<tag>out = "twentieth;"</tag></item>
+      <item>twenty-first <tag>out = "twenty-first";</tag></item> 
+      <item>twenty-second<tag>out = "twenty-second;"</tag></item>
+      <item>twenty-third<tag>out = "twenty-third;"</tag></item>
+      <item>twenty-fourth<tag>out = "twenty-fourth;"</tag></item>
+      <item>twenty-fifth<tag>out = "twenty-fifth;"</tag></item>
+      <item>twenty-sixth<tag>out = "twenty-sixth;"</tag></item>
+      <item>twenty-seventh<tag>out = "twenty-seventh;"</tag></item>
+      <item>twenty-eighth<tag>out = "twenty-eighth;"</tag></item>
+      <item>twenty-ninth<tag>out = "twenty-ninth;"</tag></item>
+      <item>thirtieth<tag>out = "thirtieth;"</tag></item>
+      <item>thirty-first<tag>out = "thirty-first;"</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="month">
+    <one-of>
+      <item>January<tag>out = "January;"</tag></item>
+      <item>February<tag>out = "February;"</tag></item>
+      <item>March<tag>out = "March;"</tag></item>
+      <item>April<tag>out = "April;"</tag></item>
+      <item>May<tag>out = "May;"</tag></item>
+      <item>June<tag>out = "June;"</tag></item>
+      <item>July<tag>out = "July;"</tag></item>
+      <item>August<tag>out = "August;"</tag></item>
+      <item>September<tag>out = "September;"</tag></item>
+      <item>October<tag>out = "October;"</tag></item>
+      <item>November<tag>out = "November;"</tag></item>
+      <item>December<tag>out = "December;"</tag></item>
+    </one-of>
+  </rule>
+
+
+</grammar>

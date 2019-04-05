@@ -1,0 +1,638 @@
+    1  ls
+    2  pwd
+    3  cd ~
+    4  ls
+    5  cd /
+    6  ls
+    7  vim
+    8  du -sh
+    9  ls
+   10  cd ~
+   11  ls
+   12  apt-install vim
+   13  cat /etc/os-release 
+   14  yum install vim
+   15  sudo yum install vim
+   16  ls
+   17  git clone https://github.com/wmacmil/lt2216-vt19
+   18  export FLASK_APP=app.py
+   19  export FLASK_ENV=development
+   20  flask run --port 8099
+   21  flask run --port 8098
+   22  flask run --port 8000
+   23  ls
+   24  cd lt2216-vt19/
+   25  ls
+   26  cd vxml-server/
+   27  ls
+   28  export FLASK_APP=app.py
+   29  export FLASK_ENV=development
+   30  flask run --port 8000
+   31  ls
+   32  vim app.py 
+   33  cd grammars/
+   34  ls
+   35  vim lab2.xml 
+   36  cd ..
+   37  ls
+   38  cd .
+   39  ls
+   40  cd templates/
+   41  ls
+   42  vim lab1.xml 
+   43  ls
+   44  cd templates/
+   45  ls
+   46  vim stuff.txt
+   47  cd ~/.vim/bundle && git clone https://github.com/tpope/vim-surround
+   48  ls
+   49  cd ~/
+   50  ls
+   51  ls -a
+   52  vim .bashrc 
+   53  ls
+   54  . ~/.bashrc 
+   55  cd lt2216-vt19/
+   56  ls
+   57  cd vxml-server/
+   58  ls
+   59  flask run --port 8000
+   60  ls
+   61  cd templates/
+   62  ls
+   63  vim lab1.xml 
+   64  ls
+   65  vim ~/.vimrc
+   66  ls
+   67  mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+   68  ls
+   69  vim ~/.vimrc 
+   70  d ~/.vim/bundle && \
+   71  cd ~/.vim/bundle && git clone https://github.com/tpope/vim-commentary
+   72  vim ~/.vimrc 
+   73  ls
+   74  cd ..
+   75  ls
+   76  cd ..
+   77  ls
+   78  mkdir tricks
+   79  cd tricks/
+   80  history > vim.txt
+   81  cd ~
+   82  ls
+   83  cd lt2216-vt19/
+   84  ls
+   85  cd vxml-server/
+   86  ls
+   87  vim templates/lab1.xml 
+   88  tmux
+   89  ls
+   90  vim templates/
+   91  cd templates/
+   92  ls
+   93  vim lab1.xml 
+   94  ls
+   95  vim stuff.txt 
+   96  ls -a
+   97  rm .stuff.txt.swp 
+   98  rm .lab1.xml.swp 
+   99  ls
+  100  vim lab1.xml 
+  101  ls
+  102  vim lab1.xml 
+  103  ls
+  104  mkdir copy
+  105  cp lab1.xml copy/
+  106  ls
+  107  cd copy/
+  108  ls
+  109  cd ..
+  110  ls
+  111  vim lab1.xml 
+  112  ls
+  113  cd ..
+  114  ls
+  115  cd copy
+  116  l
+  117  ls
+  118  vim lab1.xml 
+  119  ls
+  120  cd ..
+  121  ls
+  122  vim flascommand.txt 
+  123  cat flascommand.txt 
+  124  flask run --port 8000
+  125  ls
+  126  cd templates/
+  127  ls
+  128  cd copy
+  129  ls
+  130  vim lab1.xml 
+  131  ls
+  132  vim lab1C.xml 
+  133  ls
+  134  cd ..
+  135  ls
+  136  cd copy2/
+  137  ls
+  138  cd ..
+  139  ls
+  140  cd ..
+  141  ls
+  142  cd ..
+  143  ls
+  144  cd ..
+  145  ls
+  146  cd lt2216-vt19/
+  147  ls
+  148  cd vxml-server/templates/
+  149  ls
+  150  vim stuff.txt 
+  151  ls
+  152  vim stuff.txt 
+  153  ls
+  154  cd lt2216-vt19/vxml-server/
+  155  ls
+  156  tmux
+  157  vim menu.xml
+  158  ;s
+  159  ls
+  160  cd templates/
+  161  ls
+  162  vim lab1.xml 
+  163  ls
+  164  vim textreport.txt
+  165  ls
+  166  vim lab1.xml 
+  167  ls
+  168  cd ..
+  169  ls
+  170  cat flascommand.txt 
+  171  flask run --port 8000
+  172  flask run --port 8001
+  173  flask run --port 8000
+  174  lsof -i :8000
+  175  lsof -i :8002
+  176  kill $(lsof -i :8000)
+  177  lsof -i :8000
+  178  flask run --port 8000
+  179  quit
+  180  exit
+  181  ls
+  182  cd lt2216-vt19/vxml-server/
+  183  ls
+  184  cd templates/
+  185  ls
+  186  vim lab1.xml 
+  187  ls
+  188  cd ..
+  189  ls
+  190  tmux
+  191  exit
+  192  ls
+  193  cd lt2216-vt19/
+  194  ls
+  195  cd vxml-server/
+  196  ls
+  197  tmux
+  198  ls
+  199  cd lt2216-vt19/
+  200  ls
+  201  cd vxml-server/
+  202  ls
+  203  cat flascommand.txt 
+  204  flask run --port 8000
+  205  ls
+  206  tmux
+  207  ls
+  208  kill $(lsof -t -i:8000(
+  209  kill $(lsof -t -i:8000)
+  210  ls
+  211  cd lt2216-vt19/
+  212  ls
+  213  cat flascommand.txt 
+  214  flask run --port 8000
+  215  ls
+  216  cd templates/
+  217  ls
+  218  vim lab1.xml 
+  219  ls
+  220  ls -a
+  221  rm .lab1.xml.swp 
+  222  ls
+  223  vim lab1.xml 
+  224  ls
+  225  cd lt2216-vt19/
+  226  ls
+  227  cd vxml-server/
+  228  ls
+  229  cat flascommand.txt 
+  230  flask run --port 8000
+  231  ls
+  232  tmux
+  233  cd templates/
+  234  ls
+  235  vim lab1.xml 
+  236  cat lab1.xml 
+  237  exit
+  238  ls
+  239  cd /scratch
+  240  ls
+  241  mkdir stats
+  242  cd stats/
+  243  git clone https://github.com/wmacmil/lt2212-v19-a2
+  244  ls
+  245  cd lt2212-v19-a2/
+  246  ls
+  247  cd /
+  248  ls
+  249  ls
+  250  cd /
+  251  ls
+  252  cd s
+  253  cd scratch/
+  254  ls
+  255  cd reuters-topics/
+  256  ls
+  257  cd crude/
+  258  ls
+  259  cat article1.txt
+  260  cat article192.txt
+  261  vim article001.txt 
+  262  ls
+  263  lsb_release -a
+  264  cat /etc/*release
+  265  yum install vim
+  266  sudo yum install vim
+  267  cd -
+  268  ls
+  269  vim article001.txt 
+  270  cd crude/
+  271  ls
+  272  vim article577.txt 
+  273  man cat
+  274  ls
+  275  cd /scratch/reuters-topics/
+  276  ls
+  277  cd crude/
+  278  ls
+  279  pwd
+  280  ls
+  281  cd templates/
+  282  ls
+  283  vim lab2.xml 
+  284  ls
+  285  cd ..
+  286  ls
+  287  cat flascommand.txt 
+  288  flask run --port 8000
+  289  cd ..
+  290  ls
+  291  cd grammars/lab2.xml 
+  292  vim grammars/lab2.xml 
+  293  cd grammars/
+  294  ls
+  295  vim lab2.xml 
+  296  vim templates/lab2.xml 
+  297  cd lt2216-vt19/
+  298  ls
+  299  cd vxml-server/
+  300  ls
+  301  cat flascommand.txt 
+  302  flask run --port 8000
+  303  ls
+  304  tmux
+  305  exit
+  306  ls
+  307  vim stuff.xml
+  308  ls
+  309  mkdir copy
+  310  cp lab2.xml copy/
+  311  ls
+  312  ls
+  313  cd ..
+  314  ;ls
+  315  ls
+  316  cat flascommand.txt 
+  317  flask run --port 8000
+  318  ls
+  319  vim lab2.xml 
+  320  ls
+  321  vim copy/
+  322  ls
+  323  cd copy/
+  324  ls
+  325  vim lab2.xml 
+  326  ls
+  327  cp lab2.xml ../lab21.xml
+  328  cd ..
+  329  ls
+  330  vim lab21.xml 
+  331  cd ..
+  332  ls
+  333  cd templates/
+  334  ls
+  335  vim lab2.xml 
+  336  ls
+  337  cd lt2216-vt19/
+  338  ls
+  339  cd vxml-server/
+  340  ls
+  341  cd grammars/
+  342  ls
+  343  vim lab2.xml 
+  344  tmux
+  345  quit
+  346  exit
+  347  ls
+  348  cd ..
+  349  ls
+  350  cd templates/
+  351  ls
+  352  vim lab2.xml 
+  353  ls
+  354  cd ..
+  355  l
+  356  ls
+  357  cd grammars/
+  358  ls
+  359  vim ruleref.xml 
+  360  ls
+  361  ls
+  362  cd lt2216-vt19/
+  363  ls
+  364  cd vxml-server/
+  365  ls
+  366  cd grammars/
+  367  ls
+  368  vim lab21.xml 
+  369  ls
+  370  vim lab21.xml 
+  371  vim lab2
+  372  vim lab2.xml 
+  373  tmux
+  374  ls
+  375  cd templates/
+  376  ls
+  377  vim lab2.xml 
+  378  ls -a
+  379  rm .lab2.xml.swp 
+  380  ls -a
+  381  vim lab2.xml 
+  382  ;q
+  383  ls
+  384  cd ..
+  385  ls
+  386  cd grammars/
+  387  ls
+  388  vim lab2.xml 
+  389  ls -a
+  390  rm .lab2.xml.swp 
+  391  vim lab2.xml 
+  392  ls
+  393  vim lab2.xml 
+  394  ls
+  395  cat lab2.xml 
+  396  cat flascommand.txt 
+  397  ls
+  398  flask run --port 8000
+  399  ls
+  400  flask run --port 8000
+  401  cd .
+  402  ls
+  403  cd ~
+  404  ls
+  405  cd tricks/
+  406  ls
+  407  kill $(lsof -t -i:8000)
+  408  ls
+  409  cd lt2216-vt19/t
+  410  ls
+  411  cd lt2216-vt19/
+  412  ls
+  413  cd vxml-server/
+  414  ls
+  415  cat flascommand.txt 
+  416  tmux
+  417  ls
+  418  cd grammars/
+  419  cat lab2
+  420  ls
+  421  cat lab2.xml 
+  422  ls
+  423  vim lab21.xml 
+  424  cat lab21.xml 
+  425  ls
+  426  ls
+  427  cd lt2216-vt19/
+  428  ls
+  429  cd ..
+  430  ls
+  431  cd /
+  432  ls
+  433  cd scratch/
+  434  ls
+  435  cd reuters-topics/
+  436  ls
+  437  cd ..
+  438  ls
+  439  cd ..
+  440  ls
+  441  cd ~
+  442  ls
+  443  cd lt2216-vt19/
+  444  ls
+  445  vim lab1.org 
+  446  pwd
+  447  vim
+  448  iv
+  449  vi
+  450  ls
+  451  cd ~
+  452  ls
+  453  vim .vimrc
+  454  vi .vimrc
+  455  ls
+  456  cd stats/
+  457  ls
+  458  cd lt2212-v19-a2/
+  459  ls
+  460  vi gendoc.py 
+  461  ls
+  462  cd lt2216-vt19/vxml-server/
+  463  ls
+  464  cd templates/
+  465  ls
+  466  vim lab2.xml 
+  467  exit
+  468  ls
+  469  cd lt2216-vt19/
+  470  ls
+  471  cd lt2216-vt19/
+  472  ls
+  473  cd vxml-server/
+  474  ls
+  475  cd t3
+  476  cd templates/
+  477  ls
+  478  vim weather.xml 
+  479  vim menu.xml 
+  480  vim stuff.txt 
+  481  ls
+  482  cd lt2216-vt19/
+  483  ls
+  484  cd vxml-server/
+  485  ls
+  486  cd templates/
+  487  ls
+  488  vim menu.xml 
+  489  vim stuff.txt 
+  490  ls
+  491  vim lab2.xml 
+  492  ls
+  493  mkdir lab3
+  494  mv lab2.xml 
+  495  mv lab2.xml lab3
+  496  ls
+  497  mv lab2/lab2.xml .
+  498  ls
+  499  vim lab2
+  500  vim lab2.xml 
+  501  ls
+  502  mkdir lab
+  503  mv -r lab2 lab
+  504  ls
+  505  mv lab2 lab
+  506  ls
+  507  vim lab2.xml 
+  508  ls
+  509  vim lab2.xml 
+  510  ls
+  511  vim lab2.xml 
+  512  cd ..
+  513  ls
+  514  vim lab2.
+  515  ls
+  516  cd grammars/
+  517  ls
+  518  vim lab2.xml 
+  519  ls
+  520  vim lab21.xml 
+  521  ls
+  522  vim lab21.xml 
+  523  ls
+  524  vim lab2
+  525  vim lab2.xml 
+  526  cd lt2216-vt19/
+  527  ls
+  528  cd vxml-server/
+  529  ls
+  530  cd templates/
+  531  ls
+  532  vim lab2.xml 
+  533  ls
+  534  mkdir lab2
+  535  cp lab2.xml lab2
+  536  ls
+  537  vim lab2.xml 
+  538  tmux
+  539  ls
+  540  cd lt2216-vt19/
+  541  ls
+  542  cd vxml-server/
+  543  ls
+  544  cd templates/
+  545  ls
+  546  cd lt2216-vt19/
+  547  ls
+  548  cd vxml-server/
+  549  ls
+  550  cd templates/
+  551  ls
+  552  cd l1copy/
+  553  ls
+  554  vim lab1.xml 
+  555  ls
+  556  cd ..
+  557  ls
+  558  vim lab1.xml 
+  559  rm .lab1.xml.swp 
+  560  ls
+  561  vim lab1.xml 
+  562  vim l1copy/lab1.xml 
+  563  quit
+  564  exit
+  565  vim l1copy/lab1.xml 
+  566  ls
+  567  cd ~
+  568  ls
+  569  cd tricks/
+  570  ls
+  571  ls
+  572  cd lt2216-vt19/
+  573  ls
+  574  cd vxml-server/
+  575  ls
+  576  c
+  577  cd templates/
+  578  ls
+  579  vim l1copy/lab1.xml 
+  580  tmux
+  581  ls
+  582  cd lt2216-vt19/
+  583  ls
+  584  cd vxml-server/l
+  585  cd vxml-server/
+  586  ls
+  587  cd templates/
+  588  ls
+  589  vim lab1.xml 
+  590  cp lab1.xml lab1c.xml
+  591  vim lab
+  592  ls
+  593  vim l2copy/
+  594  vim l1copy/lab1.xml 
+  595  cp l1copy/lab1.xml .
+  596  ls
+  597  vim lab1
+  598  vim lab1.xml 
+  599  rm lab1.xml 
+  600  cp l2copy/lab1.xml .
+  601  ls
+  602  vim lab1.xml 
+  603  rm lab1.xml 
+  604  vim l2copy/lab2.xml 
+  605  ls
+  606  vim exam/lab1.xml 
+  607  mv exam/lab1.xml .
+  608  ls
+  609  tmux
+  610  ls
+  611  cd lt2216-vt19/
+  612  ls
+  613  cd vxml-server/
+  614  ls
+  615  cd ..
+  616  ls
+  617  cd ..
+  618  ls
+  619  cd ..
+  620  ls
+  621  cd ..
+  622  ls
+  623  cd scratch/
+  624  ls
+  625  vim brown_rga.txt 
+  626  vi brown_rga.txt 
+  627  ls
+  628  pwd
+  629  ls
+  630  pwd
+  631  ls
+  632  cd ..
+  633  ls
+  634  cat flascommand.txt 
+  635  flask run --port 8000
+  636  history
+  637  history > hist.txt
+  176  kill $(lsof -i :8000)

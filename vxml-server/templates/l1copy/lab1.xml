@@ -15,6 +15,7 @@
   <var name="from" />
   <var name="to" />
   <var name="date" />
+  <var name="f" />
   <!-- <var name="return" /> -->
   <var name="c" />
   <!-- <var name="tw" /> -->
@@ -30,9 +31,24 @@
   <!--   </block> -->
   <!-- </form> -->
 
+  <!-- <menu id="read_news" dtmf="true"> -->
+  <!--   <prompt> -->
+  <!--     Would you like to book a flight or get information about delayed flights.  Say book or delay. -->
+  <!--   </prompt> -->
+  <!--   <choice next="#askFrom" >book</choice> -->
+  <!--   <choice next="#noDelays" >delay</choice> -->
+  <!-- </menu> -->
+
+  <!-- <form id="noDelays"> -->
+  <!--     <prompt timeout="3s"> -->
+  <!--       There are no delays -->
+  <!--     </prompt> -->
+  <!--     <goto next="#askFrom" /> -->
+  <!-- </form> -->
+
   <form id="askFrom">
     <field name="fromField">
-      <prompt>
+      <prompt timeout="3s">
         What city are you leaving from? 
       </prompt>
       <option>london</option>
@@ -56,7 +72,15 @@
     </field>
     <filled>
       <assign name="to" expr="toField" />
-      <goto next="#askDate" />
+      <if cond="to == from">
+        <prompt>
+          The city that you are leaving and the city that you are going to must be different. Again?
+        </prompt>
+        <goto next="#askTo" />
+      <else />
+        <goto next="#askDate" />
+      </if>
+      <!-- <goto next="#askDate" /> -->
     </filled>
   </form>
 
@@ -112,7 +136,7 @@
   <form id="askReturn">
     <field name="returnField">
       <prompt>
-        What date do you want to return to <value expr="to"/>?
+        What date do you want to return to <value expr="from"/>?
       </prompt>
       <option>Monday</option>
       <option>Tuesday</option>
@@ -123,36 +147,43 @@
       <option>Sunday</option>
     </field>
     <filled>
-      <assign name="return" expr="returnField" />
+      <assign name="f" expr="returnField" />
       <goto next="#confirmDateReturn" />
     </filled>
   </form>
 
-  <!-- <form id="confirmDateReturn"> -->
-  <!--   <field name="confirmDateField" type="boolean"> -->
+  <form id="confirmDateReturn">
+    <field name="confirmDateField" type="boolean">
+      <property name="bargein" value="false"/>
+      <prompt>
+        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="f"/>? 
+      </prompt>
+      <filled>
+        <if cond="confirmDateField">
+          <goto next="#confirm" />
+        <else />
+          <goto next="#askFrom" />
+        </if>
+      </filled>
+    </field>
+  </form>
+
+  <!-- <form id="confirm"> -->
+  <!--   <field name="confirmField"> -->
   <!--     <prompt> -->
-  <!--       Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="return"/>? --> 
+  <!--       Your flight has been booked! -->
   <!--     </prompt> -->
-  <!--     <filled> -->
-  <!--       <if cond="confirmDateField"> -->
-  <!--         <goto next="#confirm" /> -->
-  <!--       <else /> -->
-  <!--         <goto next="#askFrom" /> -->
-  <!--       </if> -->
-  <!--     </filled> -->
   <!--   </field> -->
+  <!--   <filled> -->
+  <!--     <assign name="c" expr="confirmField" /> -->
+  <!--     <goto next="#askFrom" /> -->
+  <!--   </filled> -->
   <!-- </form> -->
 
   <form id="confirm">
-    <field name="confirmField">
-      <prompt>
-        Your flight has been booked!
-      </prompt>
-    </field>
-    <filled>
-      <assign name="c" expr="confirmField" />
-      <goto next="#askFrom" />
-    </filled>
+    <block>
+          Your flight has been booked!
+    </block>
   </form>
 
 </vxml>

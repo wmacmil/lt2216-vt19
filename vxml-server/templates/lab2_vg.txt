@@ -1,0 +1,12 @@
+
+Does the recognition works fine? Try to get some situations when you get false acceptances and see what confidence scores did you get.
+
+I'm actually quite impressed with the speech recognition, because it would still correctly guess "Open the window" when I used a significantly muffled voice.  I was only able to get one false acceptance by saying open the ac and the score was .35. 
+If I said open the ac (after the second grammar had been implemented) it interpreted it as open the window with a confidence of .48.  
+
+    How the selection of an optimal threshold can be automated? Write your proposal in the GUL’s comment box.
+
+I don't know what it means by automate the threshold, because I still didn't know what the best threshold meant.  If the threshold was too high, most of what I said resulted in an error, but if it was too low the mistakes didn't really get detected.  With this experience, I think one would have to generate more test examples to automate this threshold, as it seems dependent on which words in the grammar are mistaken, and likewise how large the grammar is.  If there were many similair sounding words, for instance, the system would make a lot more errors than I was able to successfully generate.  Determining the optimal threshold would require some kind of statistical distribution with human subjects and an accuracy defined over the test set generated comparing human correct identifcation with the computers.
+
+
+

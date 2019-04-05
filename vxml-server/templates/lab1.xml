@@ -1,160 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
       xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+
   <nomatch>
-    I didn't understand.
+    I did not understand. 
     <reprompt/>
   </nomatch>
   
   <noinput>
-    You didn't say anything.
+    You didn't say anything. Please answer my previous question.
     <reprompt/>
   </noinput>
 
-  <!-- Data model -->
-  <var name="from" />
-  <var name="to" />
-  <var name="date" />
-  <var name="f" />
-  <!-- <var name="return" /> -->
-  <var name="c" />
-  <!-- <var name="tw" /> -->
+  <!-- <menu id="read_news" dtmf="true"> -->
+  <menu id="read_news"> 
+    <prompt>
+      Would you like to book a flight or get information about delayed flights.  Say book or delay.  Remember, you can start over at any point by saying start over.  You can pause and give us your phone number by saying pause.
+    </prompt>
+    <choice next="bookflight" >book</choice>
+    <choice next="GetInfo" >delay</choice>
+  </menu>
 
-  <!-- State machine -->
-  <!-- <form id="welcome"> -->
-  <!--   <block> -->
-  <!--     <prompt> -->
-  <!--       <break time="2000" /> -->
-  <!--       Welcome to the flight booking service. --> 
-  <!--     </prompt> -->
-  <!--     <goto next="#askFrom" /> -->
-  <!--   </block> -->
-  <!-- </form> -->
+  <link event="globalRestart">
+    <grammar mode="voice">
+      <rule id="root_rule" scope="public">
+        <one-of>
+          <item>
+            start over
+          </item>
+        </one-of>
+      </rule>
+    </grammar>
+  </link>
 
-  <form id="askFrom">
-    <field name="fromField">
-      <prompt>
-        What city are you leaving from? 
-      </prompt>
-      <option>london</option>
-      <option>paris</option>
-      <option>new york</option>
-    </field>
-    <filled>
-      <assign name="from" expr="fromField" />
-      <goto next="#askTo" />
-    </filled>
-  </form>
+  <catch event="globalRestart">
+    <goto next="lab1"/>
+  </catch>
 
-  <form id="askTo">
-    <field name="toField">
-      <prompt>
-        Where are you going?
-      </prompt>
-      <option>london</option>
-      <option>paris</option>
-      <option>new york</option>
-    </field>
-    <filled>
-      <assign name="to" expr="toField" />
-      <goto next="#askDate" />
-    </filled>
-  </form>
+  <link event="globalPause">
+    <grammar mode="voice">
+      <rule id="root_rule" scope="public">
+        <one-of>
+          <item>
+            pause
+          </item>
+        </one-of>
+      </rule>
+    </grammar>
+  </link>
 
-  <form id="askDate">
-    <field name="dateField">
-      <prompt>
-        What date do you want to leave from <value expr="from"/>?
-      </prompt>
-      <option>Monday</option>
-      <option>Tuesday</option>
-      <option>Wednesday</option>
-      <option>Thursday</option>
-      <option>Friday</option>
-      <option>Saturday</option>
-      <option>Sunday</option>
-    </field>
-    <filled>
-      <assign name="date" expr="dateField" />
-      <goto next="#askOneWay" />
-    </filled>
-  </form>
-
-  <form id="askOneWay">
-    <field name="oneWayField" type="boolean">
-      <prompt>
-        Is it a one way trip?
-      </prompt>
-      <filled>
-        <if cond="oneWayField">
-          <goto next="#confirmDate" />
-        <else />
-          <goto next="#askReturn" />
-        </if>
-      </filled>
-    </field>
-  </form>
-
-  <form id="confirmDate">
-    <field name="oneWayFieldd" type="boolean">
-      <prompt>
-        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> 
-      </prompt>
-      <filled>
-        <if cond="oneWayFieldd">
-          <goto next="#confirm" />
-        <else />
-          <goto next="#askFrom" />
-        </if>
-      </filled>
-    </field>
-  </form>
-
-  <form id="askReturn">
-    <field name="returnField">
-      <prompt>
-        What date do you want to return to <value expr="from"/>?
-      </prompt>
-      <option>Monday</option>
-      <option>Tuesday</option>
-      <option>Wednesday</option>
-      <option>Thursday</option>
-      <option>Friday</option>
-      <option>Saturday</option>
-      <option>Sunday</option>
-    </field>
-    <filled>
-      <assign name="f" expr="returnField" />
-      <goto next="#confirmDateReturn" />
-    </filled>
-  </form>
-
-  <form id="confirmDateReturn">
-    <field name="confirmDateField" type="boolean">
-      <prompt>
-        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="f"/>? 
-      </prompt>
-      <filled>
-        <if cond="confirmDateField">
-          <goto next="#confirm" />
-        <else />
-          <goto next="#askFrom" />
-        </if>
-      </filled>
-    </field>
-  </form>
-
-  <form id="confirm">
-    <field name="confirmField">
-      <prompt>
-        Your flight has been booked!
-      </prompt>
-    </field>
-    <filled>
-      <assign name="c" expr="confirmField" />
-      <goto next="#askFrom" />
-    </filled>
-  </form>
+  <catch event="globalPause">
+    <goto next="getPhone"/>
+  </catch>
 
 </vxml>
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
+      xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+
+  <nomatch>
+    I did not understand. You can say London, Paris or New York.
+    <reprompt/>
+  </nomatch>
+  
+  <noinput>
+    You didn't say anything. Please answer my previous question.
+    <reprompt/>
+  </noinput>
+
+  <form id="noDelays">
+      <block>There are no delays</block>
+  </form>
+
+</vxml>
+

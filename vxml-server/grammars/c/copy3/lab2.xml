@@ -5,24 +5,41 @@
       <count number="optional">
         <item>Please</item>
       </count>
+
+
       <one-of>
         <item>
           <ruleref uri="#action"/> 
+          <!-- <tag>out = "action";</tag> --> 
           <tag>out.action = rules.action;</tag> 
-          <ruleref uri="#conjunction"/> 
-          <tag>out.conjunction = rules.conjunction;</tag> 
-          <ruleref uri="#object"/> 
-          <tag>out.object = rules.object;</tag> 
+          <!-- <tag>out.act = rules.latest();</tag> --> 
         </item>
         <item>
           <ruleref uri="#action2"/> 
+          <!-- <tag>out = "action";</tag> --> 
           <tag>out.action = rules.action2;</tag> 
-          <ruleref uri="#conjunction"/> 
-          <tag>out.conjunction = rules.conjunction;</tag> 
-           <ruleref uri="#object2"/> 
-           <tag>out.object = rules.object2;</tag> 
+          <!-- <tag>out.act = rules.latest();</tag> --> 
         </item>
       </one-of>
+
+       <item>
+          <ruleref uri="#conjunction"/> 
+          <!-- <tag>out = "conjunction";</tag> --> 
+          <tag>out.conjunction = rules.conjunction;</tag> 
+       </item>
+
+       <one-of>
+         <item>
+           <ruleref uri="#object"/> 
+           <!-- <tag>out = "object";</tag> --> 
+           <tag>out.object = rules.object;</tag> 
+         </item>
+         <item>
+           <ruleref uri="#object2"/> 
+           <!-- <tag>out = "object";</tag> --> 
+           <tag>out.object = rules.object2;</tag> 
+         </item>
+       </one-of>
 
    </rule>
 
@@ -62,5 +79,22 @@
     </one-of>
   </rule>
 
+<!-- turn off the light -->
+<!-- turn on the light -->
+<!-- turn off the air conditioning -->
+<!-- turn on the AC -->
+<!-- turn on the heat -->
+<!-- open the window -->
+<!-- close the door -->
+<!-- open the door -->
+<!-- close the window -->
+
+  <!-- <rule id="hello"> -->
+  <!--   <one-of> -->
+  <!--     <item>to do is to be <tag>out="Socrates";</tag></item> -->  
+  <!--     <item>to be is to do <tag>out="Sartre";</tag> </item> -->
+  <!--     <item>do be do be do <tag>out="Sinatra";</tag> </item> --> 
+  <!--   </one-of> -->
+  <!-- </rule> -->
 
 </grammar>

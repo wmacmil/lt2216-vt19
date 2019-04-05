@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
+      xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+
+  <nomatch>
+    I did not understand. You can say London, Paris or New York.
+    <reprompt/>
+  </nomatch>
+  
+  <noinput>
+    You didn't say anything. Please answer my previous question.
+    <reprompt/>
+  </noinput>
+
+  <link event="globalRestart">
+    <grammar mode="voice">
+      <rule id="root_rule" scope="public">
+        <one-of>
+          <item>
+            start over
+          </item>
+        </one-of>
+      </rule>
+    </grammar>
+  </link>
+
+  <catch event="globalRestart">
+    <goto next="lab1"/>
+  </catch>
+
+  <form id="askNumber">
+    <field name="numberField" type="digits">
+      <prompt timeout="3s">
+        What is your 7 digit phone number?
+      </prompt>
+    </field>
+    <filled>
+      <assign name="num" expr="numberField" />
+      <goto next="#askTime" />
+    </filled>
+  </form>
+
+  <form id="askTime">
+    <field name="timeField" type="digits">
+      <prompt timeout="3s">
+        How many days would you like us to call you back in?
+      </prompt>
+    </field>
+    <filled>
+      <assign name="time" expr="timeField" />
+      <goto next="#confirm" />
+    </filled>
+  </form>
+
+  <form id="confirm">
+    <block>
+          Your flight has been postponed, we'll call your phone number <value expr="num"/>, in <value expr="time"/> days!
+    </block>
+  </form>
+
+</vxml>
+

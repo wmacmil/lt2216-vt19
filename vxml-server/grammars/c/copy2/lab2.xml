@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<grammar version="1.0" tag-format="semantics/1.0" root="home">
+
+  <rule id="home" scope="public"> 
+      <one-of>
+         <item>
+            <ruleref uri="#action"/> 
+            <ruleref uri="#conjunction"/> 
+            <ruleref uri="#object"/> 
+         </item>
+         <item>
+            <ruleref uri="#conjunction"/> 
+         </item>
+         <item>
+            <ruleref uri="#object"/> 
+         </item>
+      </one-of>
+   </rule>
+
+  <rule id="object">
+    <one-of>
+       <item> light <tag>out = 'light';</tag> </item>
+       <item> heat <tag>out = 'heat';</tag> </item>
+       <item> A C <tag> out = 'air conditioning'; </tag></item>
+       <item> air conditioning <tag> out = 'air conditioning'; </tag></item>
+       <item> window <tag>out = 'window';</tag> </item>
+       <item> door <tag>out = 'door';</tag> </item>
+    </one-of>
+  </rule>
+
+  <rule id="action">
+    <one-of>
+       <item> turn off <tag>out = 'off';</tag> </item>
+       <item> turn on <tag>out = 'on';</tag> </item>
+       <item> open <tag>out = 'open';</tag> </item>
+       <item> close <tag>out = 'close';</tag> </item>
+    </one-of>
+  </rule>
+
+  <rule id="conjunction">
+    <one-of>
+       <item> the <tag>out = 'the';</tag> </item>
+    </one-of>
+  </rule>
+
+<!-- turn off the light -->
+<!-- turn on the light -->
+<!-- turn off the air conditioning -->
+<!-- turn on the AC -->
+<!-- turn on the heat -->
+<!-- open the window -->
+<!-- close the door -->
+<!-- open the door -->
+<!-- close the window -->
+
+  <!-- <rule id="hello"> -->
+  <!--   <one-of> -->
+  <!--     <item>to do is to be <tag>out="Socrates";</tag></item> -->  
+  <!--     <item>to be is to do <tag>out="Sartre";</tag> </item> -->
+  <!--     <item>do be do be do <tag>out="Sinatra";</tag> </item> --> 
+  <!--   </one-of> -->
+  <!-- </rule> -->
+
+</grammar>

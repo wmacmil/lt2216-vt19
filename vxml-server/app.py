@@ -17,9 +17,45 @@ def lab1():
     response.headers["Content-Type"] = "application/xml"
     return response
 
+@app.route('/bookflight')
+def bookflight():
+    vxml = render_template('bookflight.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+@app.route('/GetInfo')
+def GetInfo():
+    vxml = render_template('GetInfo.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+@app.route('/getPhone')
+def getPhone():
+    vxml = render_template('getPhone.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
 @app.route('/lab2')
 def lab2():
     vxml = render_template('lab2.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+
+@app.route('/lab3')
+def lab3():
+    vxml = render_template('lab3.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+@app.route('/lab4')
+def lab4():
+    vxml = render_template('lab4.xml')
     response = make_response(vxml)
     response.headers["Content-Type"] = "application/xml"
     return response

@@ -1,39 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
       xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+
   <nomatch>
-    I didn't understand.
+    I did not understand. You can say London, Paris or New York.
     <reprompt/>
   </nomatch>
   
   <noinput>
-    You didn't say anything.
+    You didn't say anything. Please answer my previous question.
     <reprompt/>
   </noinput>
 
-  <!-- Data model -->
-  <var name="from" />
-  <var name="to" />
-  <var name="date" />
-  <var name="f" />
-  <!-- <var name="return" /> -->
-  <var name="c" />
-  <!-- <var name="tw" /> -->
+  <link event="globalRestart">
+    <grammar mode="voice">
+      <rule id="root_rule" scope="public">
+        <one-of>
+          <item>
+            start over
+          </item>
+        </one-of>
+      </rule>
+    </grammar>
+  </link>
 
-  <!-- State machine -->
-  <!-- <form id="welcome"> -->
-  <!--   <block> -->
-  <!--     <prompt> -->
-  <!--       <break time="2000" /> -->
-  <!--       Welcome to the flight booking service. --> 
-  <!--     </prompt> -->
-  <!--     <goto next="#askFrom" /> -->
-  <!--   </block> -->
-  <!-- </form> -->
+  <catch event="globalRestart">
+    <goto next="lab1"/>
+  </catch>
+
+  <link event="globalPause">
+    <grammar mode="voice">
+      <rule id="root_rule" scope="public">
+        <one-of>
+          <item>
+            pause
+          </item>
+        </one-of>
+      </rule>
+    </grammar>
+  </link>
+
+  <catch event="globalPause">
+    <goto next="getPhone"/>
+  </catch>
+
+  <form id="welcome">
+    <block>
+      <prompt>
+        <break time="2000" />
+        Welcome to the flight booking service. --> 
+      </prompt>
+      <goto next="#askFrom" />
+    </block>
+  </form>
 
   <form id="askFrom">
     <field name="fromField">
-      <prompt>
+      <prompt timeout="3s">
         What city are you leaving from? 
       </prompt>
       <option>london</option>
@@ -57,7 +80,15 @@
     </field>
     <filled>
       <assign name="to" expr="toField" />
-      <goto next="#askDate" />
+      <if cond="to == from">
+        <prompt>
+          The city that you are leaving and the city that you are going to must be different. Again?
+        </prompt>
+        <goto next="#askTo" />
+      <else />
+        <goto next="#askDate" />
+      </if>
+      <!-- <goto next="#askDate" /> -->
     </filled>
   </form>
 
@@ -113,7 +144,7 @@
   <form id="askReturn">
     <field name="returnField">
       <prompt>
-        What date do you want to return to <value expr="to"/>?
+        What date do you want to return to <value expr="from"/>?
       </prompt>
       <option>Monday</option>
       <option>Tuesday</option>
@@ -129,31 +160,26 @@
     </filled>
   </form>
 
-  <!-- <form id="confirmDateReturn"> -->
-  <!--   <field name="confirmDateField" type="boolean"> -->
-  <!--     <prompt> -->
-  <!--       Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="return"/>? --> 
-  <!--     </prompt> -->
-  <!--     <filled> -->
-  <!--       <if cond="confirmDateField"> -->
-  <!--         <goto next="#confirm" /> -->
-  <!--       <else /> -->
-  <!--         <goto next="#askFrom" /> -->
-  <!--       </if> -->
-  <!--     </filled> -->
-  <!--   </field> -->
-  <!-- </form> -->
+  <form id="confirmDateReturn">
+    <field name="confirmDateField" type="boolean">
+      <property name="bargein" value="false"/>
+      <prompt>
+        Do you want to leave from <value expr="from"/> to <value expr="to"/> on <value expr="date"/> returning on <value expr="f"/>? 
+      </prompt>
+      <filled>
+        <if cond="confirmDateField">
+          <goto next="#confirm" />
+        <else />
+          <goto next="#askFrom" />
+        </if>
+      </filled>
+    </field>
+  </form>
 
   <form id="confirm">
-    <field name="confirmField">
-      <prompt>
-        Your flight has been booked!
-      </prompt>
-    </field>
-    <filled>
-      <assign name="c" expr="confirmField" />
-      <goto next="#askFrom" />
-    </filled>
+    <block>
+          Your flight has been booked!
+    </block>
   </form>
 
 </vxml>

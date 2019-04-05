@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <vxml version="2.0">
+
   <nomatch>
     I didn't understand.
   </nomatch>
@@ -8,19 +9,55 @@
     You didn't say anything.
   </noinput>
 
+  <link event="globalRestart">
+    <grammar mode="voice">
+      <rule id="root_rule" scope="public">
+        <one-of>
+          <item>
+            no
+          </item>
+        </one-of>
+      </rule>
+    </grammar>
+  </link>
+
+  <catch event="globalRestart">
+    <goto next="#test"/>
+  </catch>
+
   <form id="test">
     <field name="foo">
       <prompt>Say something!</prompt>
       <grammar src="grammars/lab2.xml"/>
     </field>
     <filled>
-	<prompt>
-	  You said: <value expr="foo$.utterance"/>,
-	  with the interpretation <value expr="foo$.interpretation"/>
-	  and with a confidence of <value expr="foo$.confidence"/>
-	  <break time="2s"/>
-	</prompt>
-	<goto next="#test"/>
+      <!-- <assign name="stuff" expr="foo" /> -->
+      <if cond="foo$.confidence &lt; 0.30">
+        <prompt>The confidence is too low</prompt>
+      <elseif cond="foo$.confidence &gt; 0.40"/>
+        <prompt>
+          You said: <value expr="foo$.utterance"/>,
+          Object was: <value expr="foo$.interpretation.object"/>
+          Action was: <value expr="foo$.interpretation.action"/>
+          with the interpretation <value expr="foo$.interpretation"/>
+          Conjunction was: <value expr="foo$.interpretation.conjunction"/>
+          and with a confidence of <value expr="foo$.confidence"/>
+          <break time="2s"/>
+        </prompt>
+      <else />
+        <prompt>
+          The confidence is uncertain. Say no if you didn't say <value expr="foo$.utterance"/>?
+          <break time="2s"/>
+          You said: <value expr="foo$.utterance"/>,
+          Object was: <value expr="foo$.interpretation.object"/>
+          Action was: <value expr="foo$.interpretation.action"/>
+          with the interpretation <value expr="foo$.interpretation"/>
+          Conjunction was: <value expr="foo$.interpretation.conjunction"/>
+          and with a confidence of <value expr="foo$.confidence"/>
+        </prompt>
+      </if>
+      <goto next="#test"/>
     </filled>
   </form>
+
 </vxml>

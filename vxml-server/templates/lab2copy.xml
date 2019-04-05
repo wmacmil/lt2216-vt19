@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<vxml version="2.0">
+
+  <nomatch>
+    I didn't understand.
+  </nomatch>
+  
+  <noinput>
+    You didn't say anything.
+  </noinput>
+
+  <form id="test">
+    <field name="foo">
+      <prompt>Say something!</prompt>
+      <grammar src="grammars/lab2.xml"/>
+    </field>
+    <filled>
+      <if cond="foo$.confidence &gt; 0.6">
+        <prompt>
+          You said: <value expr="foo$.utterance"/>,
+          Object was: <value expr="foo$.interpretation.object"/>
+          Action was: <value expr="foo$.interpretation.action"/>
+          with the interpretation <value expr="foo$.interpretation"/>
+          Conjunction was: <value expr="foo$.interpretation.conjunction"/>
+          and with a confidence of <value expr="foo$.confidence"/>
+          <break time="2s"/>
+        </prompt>
+      <elseif cond="foo$.confidence &gt; 0.4"/>
+        <prompt>The confidence is uncertain. Did you say <value expr="foo$.utterance"/>?</prompt>
+
+      <else />
+        <prompt>The confidence is too low</prompt>
+      </if>
+      <goto next="#test"/>
+    </filled>
+  </form>
+
+</vxml>
