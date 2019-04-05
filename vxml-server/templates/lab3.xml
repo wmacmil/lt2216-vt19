@@ -9,7 +9,7 @@
     You didn't say anything.
   </noinput>
 
-  <form id="test">
+  <form id="star_spangled">
     <block name="foo">
       <prompt>
         <prosody rate = "-100%" pitch = "-10%">O</prosody>
@@ -65,74 +65,74 @@
 <!-- I used the above seet music to heuristically motive pitch and rate, but found difficulty because one couldn't prolong the rate for many seconds (-100% was presumably the limit but I couldnt find any justifying documentation..). Hence some of the broken up words, etc.  It would be an interesting project to try to actually come up with a semantic map between the rate and pitch parameters in <prosody> with the actual sheet music. -->  
 
       </prompt>
-      <!-- <goto next="#test"/> -->
+      <goto next="#test"/>
     </block>
   </form>
 
 
-  <!-- <form id="test"> -->
-  <!--   <block name="foo"> -->
-  <!--     <prompt> -->
-  <!--       The --> 
-  <!--       <emphasis level="strong">biggest loser</emphasis> --> 
-  <!--       among the top 10 --> 
-  <!--       <phoneme alphabet="ipa" ph="krɪ́ptəwkərənsɪjz">cryptocurrencies</phoneme> -->
-  <!--       is --> 
-  <!--       <phoneme alphabet="ipa" ph="bɪtkɔɪn"> bitcoin </phoneme> --> 
-  <!--       <phoneme alphabet="ipa" ph="'bɪtkɔɪn"> 'bɪtkɔɪn</phoneme> -->
-  <!--       <phoneme alphabet="ipa" ph="'bɪtkɔɪn"> bitcoin</phoneme> -->
-  <!--       cash (BCH), --> 
-  <!--       <break strength="weak"/> --> 
-  <!--       down 10.58 percent in the last --> 
-  <!--       <say-as interpret-as="cardinal">24</say-as> -->
-  <!--       hours. It's also down 24.11 percent from the recent high of --> 
-  <!--       <prosody rate="-10%">$1,641.40.</prosody> -->
-  <!--       <break time="2s"/> -->
-  <!--     </prompt> -->
-  <!--     <goto next="#test"/> -->
-  <!--   </block> -->
-  <!-- </form> -->
+  <form id="test">
+    <block name="foo">
+      <prompt>
+        The 
+        <emphasis level="strong">biggest loser</emphasis> 
+        among the top 10 
+        <phoneme alphabet="ipa" ph="krɪ́ptəwkərənsɪjz">cryptocurrencies</phoneme>
+        is 
+        <phoneme alphabet="ipa" ph="bɪtkɔɪn"> bitcoin </phoneme> 
+        <phoneme alphabet="ipa" ph="'bɪtkɔɪn"> 'bɪtkɔɪn</phoneme>
+        <phoneme alphabet="ipa" ph="'bɪtkɔɪn"> bitcoin</phoneme>
+        cash (BCH), 
+        <break strength="weak"/> 
+        down 10.58 percent in the last 
+        <say-as interpret-as="cardinal">24</say-as>
+        hours. It's also down 24.11 percent from the recent high of 
+        <prosody rate="-10%">$1,641.40.</prosody>
+        <break time="2s"/>
+      </prompt>
+      <goto next="#menu"/>
+    </block>
+  </form>
 
-  <!-- <form> -->
-  <!--   <block> -->
-  <!--     I have your --> 
-  <!--     <prosody pitch="-10%">calendar</prosody> --> 
-  <!--     <prosody speed = "-10%" pitch = "-10%">open</prosody>. --> 
-  <!--     <break strength="medium"/> --> 
-  <!--     <prosody rate="-10%" pitch="-15%">For what</prosody> --> 
-  <!--     <prosody rate="-10%" pitch="+15%">date?</prosody> --> 
-  <!--     <break strength="medium"/> --> 
-  <!--     What time --> 
-  <!--     <prosody rate = "+20%">would you like</prosody> --> 
-  <!--     to --> 
-  <!--     <prosody pitch = "-15%">start?</prosody> --> 
-  <!--     <break strength="medium"/> --> 
-  <!--     How much --> 
-  <!--     <prosody pitch = "+20%">time</prosody> --> 
-  <!--     <prosody rate = "+30%">do you want to</prosody> --> 
-  <!--     block --> 
-  <!--     <prosody pitch = "+20%">out?</prosody> --> 
-  <!--     <break strength="medium"/> --> 
-  <!--     What --> 
-  <!--     <break strength="x-weak"/> --> 
-  <!--     shall we call --> 
-  <!--     <prosody pitch = "-10%">this?</prosody> --> 
-  <!--     <break strength="medium"/> --> 
-  <!--     Ok. -->
-  <!--     <prosody pitch = "+10%">I</prosody> --> 
-  <!--     <prosody pitch = "+20%">have</prosody> --> 
-  <!--     <prosody pitch = "+30%">you</prosody> --> 
-  <!--     <prosody pitch = "+40%">down</prosody> --> 
-  <!--     <prosody pitch = "+50%">for</prosody> --> 
-  <!--     <prosody pitch = "+50%">Sunday</prosody> --> 
-  <!--     <prosody pitch = "+60%">for</prosody> --> 
-  <!--     <prosody pitch = "+70%"><say-as interpret-as="date">10/12/2020</say-as></prosody> -->
-  <!--     <prosody volume = "loud" pitch = "+90%">Please</prosody> --> 
-  <!--     <prosody pitch = "-50%">be</prosody> --> 
-  <!--     <prosody pitch = "-90%">early.</prosody> --> 
-  <!--     <break strength="medium"/> --> 
-  <!--   </block> -->
-  <!-- </form> -->
+  <form id="menu">
+    <block>
+      I have your 
+      <prosody pitch="-10%">calendar</prosody> 
+      <prosody speed = "-10%" pitch = "-10%">open</prosody>. 
+      <break strength="medium"/> 
+      <prosody rate="-10%" pitch="-15%">For what</prosody> 
+      <prosody rate="-10%" pitch="+15%">date?</prosody> 
+      <break strength="medium"/> 
+      What time 
+      <prosody rate = "+20%">would you like</prosody> 
+      to 
+      <prosody pitch = "-15%">start?</prosody> 
+      <break strength="medium"/> 
+      How much 
+      <prosody pitch = "+20%">time</prosody> 
+      <prosody rate = "+30%">do you want to</prosody> 
+      block 
+      <prosody pitch = "+20%">out?</prosody> 
+      <break strength="medium"/> 
+      What 
+      <break strength="x-weak"/> 
+      shall we call 
+      <prosody pitch = "-10%">this?</prosody> 
+      <break strength="medium"/> 
+      Ok.
+      <prosody pitch = "+10%">I</prosody> 
+      <prosody pitch = "+20%">have</prosody> 
+      <prosody pitch = "+30%">you</prosody> 
+      <prosody pitch = "+40%">down</prosody> 
+      <prosody pitch = "+50%">for</prosody> 
+      <prosody pitch = "+50%">Sunday</prosody> 
+      <prosody pitch = "+60%">for</prosody> 
+      <prosody pitch = "+70%"><say-as interpret-as="date">10/12/2020</say-as></prosody>
+      <prosody volume = "loud" pitch = "+90%">Please</prosody> 
+      <prosody pitch = "-50%">be</prosody> 
+      <prosody pitch = "-90%">early.</prosody> 
+      <break strength="medium"/> 
+    </block>
+  </form>
 
 
 

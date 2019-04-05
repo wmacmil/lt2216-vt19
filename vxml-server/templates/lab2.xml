@@ -22,8 +22,24 @@
   </link>
 
   <catch event="globalRestart">
-    <goto next="#test"/>
+    <goto next="#test1"/>
   </catch>
+
+  <form id="test1">
+    <field name="foo1">
+      <prompt>Say something!</prompt>
+      <grammar src="grammars/lab21.xml"/>
+    </field>
+    <filled>
+      <prompt>
+        You said: <value expr="foo1$.utterance"/>,
+        with the interpretation <value expr="foo1$.interpretation"/>
+        and with a confidence of <value expr="foo1$.confidence"/>
+        <break time="2s"/>
+      </prompt>
+      <goto next="#test"/>
+    </filled>
+  </form>
 
   <form id="test">
     <field name="foo">
@@ -32,9 +48,9 @@
     </field>
     <filled>
       <!-- <assign name="stuff" expr="foo" /> -->
-      <if cond="foo$.confidence &lt; 0.30">
+      <if cond="foo$.confidence &lt; 0.40">
         <prompt>The confidence is too low</prompt>
-      <elseif cond="foo$.confidence &gt; 0.40"/>
+      <elseif cond="foo$.confidence &gt; 0.50"/>
         <prompt>
           You said: <value expr="foo$.utterance"/>,
           Object was: <value expr="foo$.interpretation.object"/>
