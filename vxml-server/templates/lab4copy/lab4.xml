@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
+      xmlns:voxeo="http://community.voxeo.com/xmlns/vxml">
+
+  <!-- <nomatch> -->
+  <!--   I did not understand. You can say London, Paris or New York. -->
+  <!--   <reprompt/> -->
+  <!-- </nomatch> -->
+  
+  <noinput>
+    You didn't say anything. Please answer my previous question.
+    <reprompt/>
+  </noinput>
+
+  <!-- <link event="globalRestart"> -->
+  <!--   <grammar mode="voice"> -->
+  <!--     <rule id="root_rule" scope="public"> -->
+  <!--       <one-of> -->
+  <!--         <item> -->
+  <!--           start over -->
+  <!--         </item> -->
+  <!--       </one-of> -->
+  <!--     </rule> -->
+  <!--   </grammar> -->
+  <!-- </link> -->
+
+  <!-- <catch event="globalRestart"> -->
+  <!--   <goto next="lab1"/> -->
+  <!-- </catch> -->
+
+  <!-- <link event="globalPause"> -->
+  <!--   <grammar mode="voice"> -->
+  <!--     <rule id="root_rule" scope="public"> -->
+  <!--       <one-of> -->
+  <!--         <item> -->
+  <!--           pause -->
+  <!--         </item> -->
+  <!--       </one-of> -->
+  <!--     </rule> -->
+  <!--   </grammar> -->
+  <!-- </link> -->
+
+  <!-- <catch event="globalPause"> -->
+  <!--   <goto next="getPhone"/> -->
+  <!-- </catch> -->
+
+
+  <form id="askFrom">
+
+    <!-- <field name="fromField"> -->
+    <!--   <prompt timeout="3s"> -->
+    <!--     Where do you want to go from and to? -->
+    <!--   </prompt> -->
+    <!--   <grammar src="grammars/lab4.xml"/> -->
+    <!-- </field> -->
+    <!-- <filled> -->
+    <!--   <prompt> -->
+    <!--     You said: <value expr="fromField$.utterance"/> -->
+    <!--     To was: <value expr="fromField$.interpretation.to"/> -->
+    <!--     From was: <value expr="fromField$.interpretation.from"/> -->
+    <!--     Date was: <value expr="fromField$.interpretation.date"/> -->
+    <!--   </prompt> -->
+    <!--   <goto next="#askFrom" /> -->
+    <!-- </filled> -->
+  <!-- </form> -->
+
+    <!-- <field name="fromField"> -->
+    <!--   <grammar src="grammars/lab4.xml"/> -->
+    <!--   <prompt timeout="5s"> -->
+    <!--     Where do you want to go from and to, and when? -->
+    <!--   </prompt> -->
+    <!--   <nomatch count="1">Please say something like "from Paris to London on March first returning on May second".</nomatch> -->
+    <!-- </field> -->
+    <!-- <field name="from"> -->
+    <!--   <grammar src="grammars/lab4.xml"/> -->
+    <!--   <prompt>From which city are you leaving?</prompt> -->
+    <!-- </field> -->
+    <!-- <field name="to"> -->
+    <!--   <grammar src="grammars/lab4.xml"/> -->
+    <!--   <prompt>Which city are you going to?</prompt> -->
+    <!-- </field> -->
+    <!-- <field name="date"> -->
+    <!--   <grammar src="grammars/lab4.xml"/> -->
+    <!--   <prompt>Which date are you leaving?</prompt> -->
+    <!-- </field> -->
+    <!-- <filled> -->
+    <!--   <prompt> -->
+    <!--     You said: <value expr="fromField$.utterance"/> -->
+    <!--     To was: <value expr="fromField$.interpretation.to"/> -->
+    <!--     From was: <value expr="fromField$.interpretation.from"/> -->
+    <!--     Date was: <value expr="fromField$.interpretation.date"/> -->
+    <!--   </prompt> -->
+    <!--   <goto next="#askFrom" /> -->
+    <!-- </filled> -->
+  <!-- </form> -->
+
+    <grammar src="grammars/lab4.xml"/>
+    <initial name="init_start">
+      <prompt timeout="5s">
+        Where do you want to go from and to, and when?
+      </prompt>
+      <nomatch count="1">Please say something like "from Paris to London on March first returning on May second".</nomatch>
+      <nomatch count="2">
+        I still don't understand.  One at a time.
+        <assign name="init_start" expr="true"/>
+        <reprompt/>
+      </nomatch>
+    </initial>
+    <field name="from">
+      <grammar src="grammars/lab4.xml#f"/>
+      <prompt>From which city are you leaving?</prompt>
+      <nomatch count="1">Please say something like "from Paris". </nomatch>
+    </field>
+    <field name="to">
+      <grammar src="grammars/lab4.xml#t"/>
+      <prompt>Which city are you going to?</prompt>
+      <nomatch count="1">Please say something like "to London ".</nomatch>
+    </field>
+    <field name="date">
+      <grammar src="grammars/lab4.xml#d"/>
+      <prompt>Which date are you leaving?</prompt>
+      <nomatch count="1">Please say something like "on May Fourth".</nomatch>
+    </field>
+    <field name="hello">
+      <grammar src="grammars/lab4.xml#r"/>
+      <prompt>Which date are you returning?</prompt>
+      <nomatch count="1">Please say something like "returning on May Fourth".</nomatch>
+    </field>
+    <filled>
+      <if cond="to == from">
+        <prompt>
+          The city that you are leaving and the city that you are going to must be different. Again?
+        </prompt>
+        <goto next="#askFrom" />
+      <else />
+        <prompt>
+          To was: <value expr="to"/>
+          From was: <value expr="from"/>
+          Date was: <value expr="date"/>
+          Return date was: <value expr="hello"/>
+        </prompt>
+      </if>
+      <goto next="#askFrom" />
+    </filled>
+  </form>
+
+  <form id="confirm">
+    <block>
+          Your flight has been booked!
+    </block>
+  </form>
+
+
+</vxml>
+

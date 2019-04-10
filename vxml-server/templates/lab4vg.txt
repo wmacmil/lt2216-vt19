@@ -1,0 +1,7 @@
+
+The only thing I did to make it more user friendly was to add an extensive list of permutations of rules.  I could have added even more options but it would be nice to write a script to generate all possible syntactically correct rules. In addition, it gives the user a specification of the input type needed (to match the grammar rules) with custom nomatch elements for each field which isn't captured in the initial element.
+
+
+
+ 
+

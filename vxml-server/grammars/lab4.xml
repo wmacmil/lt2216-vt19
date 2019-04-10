@@ -5,23 +5,27 @@
     <item repeat="0-1">I want to go </item>
     <one-of>
 
-      <!-- <item> -->
-      <!--   <ruleref uri="#t"/> -->
-      <!--   <tag>out.to = rules.t;</tag> -->
-      <!-- </item> -->
-      <!-- <item> -->
-      <!--   <ruleref uri="#f"/> -->
-      <!--   <tag>out.to = rules.f;</tag> -->
-      <!-- </item> -->
-      <!-- <item> -->
-      <!--   <ruleref uri="#d"/> -->
-      <!--   <tag>out.to = rules.d;</tag> -->
-      <!-- </item> -->
-      <!-- <item> -->
-      <!--   <ruleref uri="#r"/> -->
-      <!--   <tag>out.to = rules.r;</tag> -->
-      <!-- </item> -->
+      <item>
+        <ruleref uri="#t"/>
+        <tag>out.to = rules.t;</tag>
+      </item>
+      <item>
+        <ruleref uri="#f"/>
+        <tag>out.from = rules.f; </tag>
+      </item>
+      <item>
+        <ruleref uri="#d"/>
+        <tag>out.date = rules.d;</tag>
+      </item>
+      <item>
+        <ruleref uri="#r"/>
+        <tag>out.hello = rules.r;</tag>
+      </item>
 
+      <item>
+        <ruleref uri="#p"/>
+        <tag>out.plane = rules.p;</tag>
+      </item>
 
       <item>
         <ruleref uri="#t"/>
@@ -36,16 +40,133 @@
 
       <item>
         <ruleref uri="#t"/>
+        <ruleref uri="#d"/>
+        <tag>out.to = rules.t; out.date = rules.d; </tag>
+      </item>
+      <item>
+        <ruleref uri="#d"/>
+        <ruleref uri="#t"/>
+        <tag>out.to = rules.t; out.date = rules.d; </tag>
+      </item>
+
+      <item>
+        <ruleref uri="#f"/>
+        <ruleref uri="#d"/>
+        <tag>out.from = rules.f; out.date = rules.d; </tag>
+      </item>
+      <item>
+        <ruleref uri="#d"/>
+        <ruleref uri="#f"/>
+        <tag>out.from = rules.f; out.date = rules.d; </tag>
+      </item>
+
+      <item>
+        <ruleref uri="#t"/>
         <ruleref uri="#f"/>
         <ruleref uri="#d"/>
         <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d;</tag>
       </item>
+
 
       <item>
         <ruleref uri="#f"/>
         <ruleref uri="#t"/>
         <ruleref uri="#d"/>
         <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#d"/>
+        <ruleref uri="#f"/>
+        <ruleref uri="#t"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#f"/>
+        <ruleref uri="#d"/>
+        <ruleref uri="#t"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#d"/>
+        <ruleref uri="#t"/>
+        <ruleref uri="#f"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#t"/>
+        <ruleref uri="#d"/>
+        <ruleref uri="#f"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#t"/>
+        <ruleref uri="#f"/>
+        <ruleref uri="#d"/>
+        <ruleref uri="#r"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d; out.hello = rules.r;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#f"/>
+        <ruleref uri="#t"/>
+        <ruleref uri="#d"/>
+        <ruleref uri="#r"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d; out.hello = rules.r;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#d"/>
+        <ruleref uri="#f"/>
+        <ruleref uri="#t"/>
+        <ruleref uri="#r"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d; out.hello = rules.r;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#f"/>
+        <ruleref uri="#d"/>
+        <ruleref uri="#t"/>
+        <ruleref uri="#r"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d; out.hello = rules.r;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#d"/>
+        <ruleref uri="#t"/>
+        <ruleref uri="#f"/>
+        <ruleref uri="#r"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d; out.hello = rules.r;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#t"/>
+        <ruleref uri="#d"/>
+        <ruleref uri="#f"/>
+        <ruleref uri="#r"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d; out.hello = rules.r;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#t"/>
+        <ruleref uri="#f"/>
+        <ruleref uri="#d"/>
+        <ruleref uri="#r"/>
+        <ruleref uri="#p"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d; out.hello = rules.r; out.plane = rules.p;</tag>
+      </item>
+
+      <item>
+        <ruleref uri="#f"/>
+        <ruleref uri="#t"/>
+        <ruleref uri="#d"/>
+        <ruleref uri="#r"/>
+        <ruleref uri="#p"/>
+        <tag>out.to = rules.t; out.from = rules.f; out.date = rules.d; out.hello = rules.r; out.plane = rules.p;</tag>
       </item>
 
     </one-of>
@@ -72,7 +193,7 @@
       on 
       <ruleref uri="#month"/>
       <ruleref uri="#number"/>
-      <tag>out = rules.month + " " + rules.number;</tag>
+      <tag>out = rules.month + rules.number;</tag>
     </item>
   </rule>
 
@@ -81,8 +202,24 @@
       returning on 
       <ruleref uri="#month"/>
       <ruleref uri="#number"/>
-      <tag>out = rules.month + " " + rules.number;</tag>
+      <tag>out = rules.month + rules.number;</tag>
     </item>
+  </rule>
+
+  <rule id="p">
+    <item>
+      riding on a 
+      <ruleref uri="#plane"/>
+      <tag>out = rules.plane; </tag>
+    </item>
+  </rule>
+
+  <rule id="plane">
+    <one-of>
+       <item> B 52 <tag>out = "swag";</tag> </item>
+       <item> Boeing max 8  <tag>out = "death";</tag> </item>
+       <item> Jumbo Jet <tag>out = "jj";</tag> </item>
+    </one-of>
   </rule>
 
   <rule id="city">
