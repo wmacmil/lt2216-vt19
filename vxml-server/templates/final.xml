@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<vxml version="2.0">
+
+  <nomatch>
+    I didn't understand.
+  </nomatch>
+  
+  <noinput>
+    You didn't say anything.
+  </noinput>
+
+  <script> <![CDATA[ 
+
+    <!-- no const in emca < 2015 -->
+    <!-- sequential operations were confusing, seperation of semantic elements -->
+
+
+
+    var count = 1;
+
+    var rlist;
+    var olist;
+
+    <!-- [1,2,3,4] [+,-,+] -->
+    var len = 2;
+    var player1 = 0;
+    var player2 = 0;
+
+
+    <!-- two different semantics -->
+    <!-- in this semantics precedence is inferred by player/user-->
+    function randList() {
+      var min=0; 
+      var max=10 * count;  
+      var localListInts = [];
+      var localListOps = [];
+      for (i = 0; i < len; i++) { 
+        localListInts.push(Math.floor(Math.random() * (+max - +min)) + +min); 
+      }
+      rlist = localListInts;
+      for (i = 0; i < (len - 1); i++) { 
+        localListOps.push(Math.random()); 
+      }
+      olist = localListOps;
+      loc = rlist[0];
+      for (i = 1; i < len ; i++) { 
+        if (localListOps[i-1] > 0.5) {
+          loc += "plus";
+        } else {
+          loc += "times";
+        }
+        loc += rlist[i];
+      }
+      count += 1
+      return loc;
+    }    
+  
+
+    <!-- semantics -->
+    <!-- recursion would be nice -->
+    <!-- associativity of the operators is the only issue still --> 
+    <!-- (9*6)+5 correct-->
+    <!-- 4+(9*8) incorrect-->
+    <!-- our solution is to ask the user to left associate everything.  makes it difficult to "reason about on the fly" -->
+    <!-- problems is we don't have a syntax tree -->
+    <!-- e.g. need to parse just to evaluate -->
+    <!-- or, do some major ad-hoccery --> 
+    <!-- function yourNum(futureVal,len) { -->
+    function yourNum(futureVal) {
+      var acc = rlist[0];
+      for (i = 1; i < len ; i++) { 
+        if (olist[i-1] > 0.5) {
+          acc += rlist[i]; 
+        } else {
+          acc *= rlist[i]; 
+        }
+      }
+      len += 1;
+      var correct = acc;
+      if (correct == futureVal) {
+        player1 += 1;
+        return futureVal + "is correct"; 
+      } else {
+        return futureVal + "is incorrect. The correct value is " + correct;
+      }
+    }    
+
+    function reset() {
+      len = 2;
+      count = 1;
+      player2 = player1;
+      player1 = 0;
+      return player2;
+    }
+
+    function reset2() {
+      return player1;
+    }
+
+    function winner() {
+      if (player2 > player1) {
+        return "Player 1 won"; 
+      } else if (player1 == player2) {
+        return "Player 1 tied player 2.";
+      } else {
+        return "Player 2 won"; 
+      }
+    } 
+
+
+  ]]> </script> 
+
+  <var name="currNo" expr="1"/>
+  <var name="currNo2" expr="1"/>
+  <var name="numRounds" expr="3"/>
+
+  <form id="computePresentValue">  
+
+    <field name="fv" type="digits">
+      <prompt>
+        What is 
+        <value expr="randList() "/>?
+      </prompt>
+    </field> 
+
+    <filled> 
+      <prompt> 
+        Your value of 
+        <value expr="yourNum(fv) "/>.
+      </prompt> 
+
+      <assign name="currNo" expr="currNo + 1"/>
+
+      <if cond="currNo > numRounds"> 
+        <prompt> 
+          Player one scored
+          <value expr="reset() "/>
+        </prompt> 
+        <goto next="#computePresentValue1" />
+      <else />
+        <goto next="#computePresentValue" />
+      </if>
+    </filled> 
+
+  </form> 
+
+  <form id="computePresentValue1">  
+    <field name="fv1" type="digits">
+      <prompt>
+        Player two: What is 
+        <value expr="randList() "/>?
+      </prompt>
+    </field> 
+    <filled> 
+      <prompt> 
+        Your value of 
+        <value expr="yourNum(fv1) "/>.
+      </prompt> 
+
+      <assign name="currNo2" expr="currNo2 + 1"/>
+      <if cond="currNo2 > numRounds"> 
+        <prompt> 
+          Player two scored
+          <value expr="reset2() "/>.
+        </prompt> 
+        <goto next="#confirm" />
+      <else />
+        <goto next="#computePresentValue1" />
+      </if>
+    </filled> 
+  </form> 
+
+  <form id="confirm">
+    <block>
+      <value expr="winner() "/>.
+    </block>
+  </form>
+
+</vxml>

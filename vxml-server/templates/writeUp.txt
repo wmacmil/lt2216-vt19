@@ -1,0 +1,39 @@
+
+"it was less clear what the dialogue capabilitie of the game were (partly perhaps because your presentation was mostly organised around the code and less organised around the bullet points listed on the course GUL-page)."
+
+I'm not sure what kind of dialogue capabilities you are expecting, but would be happy to expand the game to meet whatever standard apply.  Below I answer the bullet points explicity.  
+
+
+
+    The game: what does it do?
+
+  This game, we'll call it ArithComp for brevity, implements a two player game where the backend engine generates random n arithmetic increasing (probabilitically) complexity expressions.  It is highly modular and gives the developer a few easily tweakable parameters two change the rules.  
+
+  These are the numRounds variable defined at the beginning of the XML, as well as the max parameter on the second line of the randList() function.  One can simply change the number of rounds, and the max expression to differ the conditions of the game greatly.  If you alter the number of rounds to 5 you can easily get values in the millions. 
+
+The state is mostly kept under the rug in the javascript, although the reset() and reset2() functions are hacks to allow a shared state about number of rounds between the xml and javascript.
+
+
+    Technicalities: what platform, which standards etc were used?
+
+VoiceXML with Javascript.
+
+    Challenges; what was difficult and how did you solve it?
+
+As I said in class, and is indicated in the comments of the code, the expressions have to be evaluated in left to right order rather than the general way we have implicit abstract syntax trees buried underneath our arithmetic. 
+
+    Relation to course contents; what parts of the course were most useful to you, and how did you use them?
+
+Mostly just learning how to use voicexml. I didn't style it (which was recommended as an improvement to patch/ resolve the parsing difficulty). Nor did I use external grammars because the user only has to give numbers as inputs.  Because of these, there was no need to do anything with the 
+
+    Future work: how could the game be developed?
+
+"There are two ways of constructing a software design. One way is to make it so simple that there are obviously no deficiencies. And the other way is to make it so complicated that there are no obvious deficiencies." - C.A.R Hoare
+
+I made this as simple as possible, but with the intention that many of the components could be easily abstracted.  There are so many dimensions one could take this. I offer a few suggestions below. 
+
+(i) Expand the programming language: One could simply extend arithmetical expressions with minus, division, exponentiation, etc. but the conditions would need to change (most likely, more time for the user to have to solve with pen and paper).  One could come up with a more clever way of choosing a winner and loser.  This could possibly involve a time parameter (which counts incorporates time to answer questions), or a better way of having the min and max values of the expressions that makes it more fair (e.g. a 3 operator expression with a times 0 automatically is zero). One could even think of adding more complicated programming language features (e.g. "what is if (3+2 > 0) return yay else return nay") but this would likewise be difficult without the ASTs.
+
+(ii)  One could allow a dialogue between the players, so that one player could ask an expression and the other would have to answer and vice versa.  Or, have a third person, a moderator, input expressions for the users.  This doesn't really seem as elegant though, as I like the computer doing the "grunt work" of evaluating the expressions.
+
+(iii) One could somehow have two players simultaneously answering the same question.  I would actually like to do this, but am not sure if voicexml can handle three way calls (either way, definitely beyond the scope of this course).

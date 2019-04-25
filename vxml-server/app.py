@@ -17,6 +17,13 @@ def lab1():
     response.headers["Content-Type"] = "application/xml"
     return response
 
+@app.route('/final')
+def final():
+    vxml = render_template('final.xml')
+    response = make_response(vxml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
 @app.route('/bookflight')
 def bookflight():
     vxml = render_template('bookflight.xml')
